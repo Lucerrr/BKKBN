@@ -1,0 +1,941 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+    --primary-color: #0d47a1; /* Deep Royal Blue */
+    --primary-light: #5472d3;
+    --primary-dark: #002171;
+    --secondary-color: #29b6f6; /* Light Blue Accent */
+    --accent-color: #ff9800; /* Orange for CTA */
+    --text-dark: #1f2937;
+    --text-muted: #6b7280;
+    --bg-light: #f8fafc; /* Softer light gray */
+    --bg-white: #ffffff;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius-md: 0.75rem;
+    --radius-lg: 1.5rem;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    --primary-color: #64b5f6; /* Lighter blue */
+    --primary-light: #9be7ff;
+    --primary-dark: #2286c3;
+    --secondary-color: #4fc3f7;
+    --accent-color: #ffb74d;
+    --text-dark: #f1f5f9; /* Slate 100 */
+    --text-muted: #94a3b8; /* Slate 400 */
+    --bg-light: #1e293b; /* Slate 800 */
+    --bg-white: #0f172a; /* Slate 900 */
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background-color: #f0f4f8; /* Darker than white/very light gray */
+    background-image: 
+        radial-gradient(at 0% 0%, hsla(210,100%,96%,1) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(217,100%,96%,1) 0, transparent 50%), 
+        radial-gradient(at 100% 100%, hsla(210,100%,96%,1) 0, transparent 50%), 
+        radial-gradient(at 0% 100%, hsla(217,100%,96%,1) 0, transparent 50%);
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+    background-color: #0f172a;
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(15, 23, 42, 1) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, rgba(30, 41, 59, 1) 0, transparent 50%), 
+        radial-gradient(at 100% 100%, rgba(15, 23, 42, 1) 0, transparent 50%), 
+        radial-gradient(at 0% 100%, rgba(30, 41, 59, 1) 0, transparent 50%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-dark);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6 {
+    color: var(--primary-color);
+}
+
+/* Glassmorphism Utility */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .glass-effect {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Navbar Modern */
+.navbar-custom {
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow-sm);
+    padding: 0.5rem 0;
+    transition: var(--transition);
+}
+
+[data-theme="dark"] .navbar-custom {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.navbar-custom .navbar-brand {
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-custom .nav-link {
+    color: var(--text-dark) !important;
+    font-weight: 600;
+    padding: 0.8rem 1.2rem;
+    transition: var(--transition);
+    position: relative;
+    font-size: 0.95rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Dark Mode Overrides for Bootstrap Components */
+[data-theme="dark"] .bg-white {
+    background-color: var(--bg-white) !important;
+    color: var(--text-dark);
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: var(--bg-light) !important;
+    color: var(--text-dark);
+}
+
+[data-theme="dark"] .text-dark {
+    color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .text-muted {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .text-black {
+    color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] p, 
+[data-theme="dark"] span, 
+[data-theme="dark"] li, 
+[data-theme="dark"] td {
+    color: var(--text-dark);
+}
+
+/* Ensure text inside colored headers stays white in dark mode */
+[data-theme="dark"] .card-header.text-white h1,
+[data-theme="dark"] .card-header.text-white h2,
+[data-theme="dark"] .card-header.text-white h3,
+[data-theme="dark"] .card-header.text-white h4,
+[data-theme="dark"] .card-header.text-white h5,
+[data-theme="dark"] .card-header.text-white h6 {
+    color: white !important;
+}
+
+[data-theme="dark"] .text-white {
+    color: white !important;
+}
+
+/* Ensure icons inside colored headers stay white */
+[data-theme="dark"] .card-header.text-white i {
+    color: white !important;
+}
+
+/* Force Table Text to be Dark/Visible in Dark Mode IF background is failing to be dark, or just ensure high contrast */
+/* Actually, based on user feedback "semakin tidak kelihatan" (even less visible), it means white text on white bg. */
+/* If the card background is white (which it seems to be in the screenshot), we must make text DARK */
+
+[data-theme="dark"] .card {
+    background-color: var(--bg-white); /* #0f172a */
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* If the card background is successfully dark (#0f172a), then text should be white. */
+/* But the screenshot shows WHITE background. */
+/* This means the [data-theme="dark"] .card rule is NOT APPLYING or being overridden. */
+/* Let's force it with !important to ensure dark background */
+[data-theme="dark"] .card {
+    background-color: #0f172a !important; 
+    border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Now that we forced background to be dark, we can safely set text to be light */
+[data-theme="dark"] .card-body {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .table {
+    color: #f1f5f9 !important;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .table td, 
+[data-theme="dark"] .table th {
+    color: #f1f5f9 !important;
+    background-color: transparent !important; /* Prevent cell background from overriding row/table bg */
+}
+
+/* Handle striped rows specifically */
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > * {
+    color: #f1f5f9 !important;
+    box-shadow: inset 0 0 0 9999px rgba(255,255,255,0.05) !important; /* Bootstrap method for stripes */
+    background-color: transparent !important; /* Reset explicit bg color if any */
+}
+
+/* Specific fix for text inside table cells that might be wrapped */
+[data-theme="dark"] .table-striped > tbody > tr > td {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .navbar-toggler {
+    border-color: rgba(255,255,255,0.5);
+}
+
+[data-theme="dark"] .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--bg-white);
+    border-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--text-dark);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: var(--bg-light);
+}
+
+/* Brand Section Animation */
+.brand-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    animation: shine 6s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    padding: 180px 0 100px; /* More padding top for fixed navbar */
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    /* New Attractive Background */
+    background: linear-gradient(120deg, #e0f2fe 0%, #bbdefb 100%);
+    background-image: 
+        radial-gradient(at 10% 10%, rgba(13, 71, 161, 0.1) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, rgba(41, 182, 246, 0.1) 0px, transparent 50%);
+}
+
+[data-theme="dark"] .hero-section {
+    background: linear-gradient(120deg, #0f172a 0%, #1e293b 100%);
+    background-image: 
+        radial-gradient(at 10% 10%, rgba(100, 181, 246, 0.1) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, rgba(34, 134, 195, 0.1) 0px, transparent 50%);
+}
+
+/* Menu Hover Effect - Interactive */
+.navbar-custom .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px;
+    left: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar-custom .nav-link:hover::after {
+    width: 80%;
+}
+
+[data-theme="dark"] .navbar-custom .nav-link::after {
+    background-color: var(--secondary-color);
+}
+
+/* Features */
+.feature-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    box-shadow: var(--shadow-md);
+    margin: 0 auto 1.5rem;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    transition: var(--transition);
+}
+
+[data-theme="dark"] .feature-icon-wrapper {
+    background: var(--bg-light);
+    color: var(--primary-light);
+}
+
+.card:hover .feature-icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    box-shadow: 0 10px 20px rgba(13, 71, 161, 0.2);
+}
+
+/* Footer Refined */
+.footer {
+    background: linear-gradient(to bottom, #0f172a, #0b1120);
+    color: #cbd5e1;
+    padding: 80px 0 30px;
+    font-size: 0.95rem;
+}
+
+.footer h5 {
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.footer .text-muted {
+    color: #94a3b8 !important; /* Lighter gray for better contrast on dark bg */
+}
+
+.footer h5::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    height: 15px;
+    width: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+}
+
+.footer a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 5px 0;
+    display: flex; /* align icon */
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.footer a:hover {
+    color: var(--secondary-color);
+    transform: translateX(10px); /* Slide effect */
+    text-shadow: 0 0 10px rgba(41, 182, 246, 0.5); /* Glow */
+    padding-left: 5px;
+}
+
+.footer a i {
+    transition: transform 0.3s ease;
+}
+
+.footer a:hover i {
+    transform: rotate(360deg); /* Spin icon on hover */
+}
+
+.footer .social-links a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+    text-align: center;
+    line-height: 36px;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: white;
+}
+
+.footer .social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .navbar-custom .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .brand-section {
+        border-bottom-right-radius: 30px !important;
+        padding-right: 1rem !important;
+    }
+    
+    /* Full Screen Mobile Menu Overlay */
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%) !important; /* Blue Background */
+        padding: 0 2rem 2rem 2rem; /* Reset top padding here */
+        padding-top: 150px !important; /* Force large top padding to clear X button */
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        opacity: 0;
+        visibility: hidden;
+        box-shadow: none;
+        border-radius: 0;
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    .navbar-collapse.show {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    [data-theme="dark"] .navbar-collapse {
+        background: rgba(15, 23, 42, 0.98);
+        box-shadow: none;
+    }
+    
+    .navbar-nav {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-item {
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+
+    .navbar-collapse.show .nav-item {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Stagger animation for menu items */
+    .navbar-collapse.show .nav-item:nth-child(1) { transition-delay: 0.1s; }
+    .navbar-collapse.show .nav-item:nth-child(2) { transition-delay: 0.2s; }
+    .navbar-collapse.show .nav-item:nth-child(3) { transition-delay: 0.3s; }
+    .navbar-collapse.show .nav-item:nth-child(4) { transition-delay: 0.4s; }
+    .navbar-collapse.show .nav-item:nth-child(5) { transition-delay: 0.5s; }
+    .navbar-collapse.show .nav-item:nth-child(6) { transition-delay: 0.6s; }
+    .navbar-collapse.show .nav-item:nth-child(7) { transition-delay: 0.7s; }
+    .navbar-collapse.show .nav-item:nth-child(8) { transition-delay: 0.8s; }
+
+    .navbar-custom .nav-link {
+        padding: 10px 0;
+        align-items: center;
+        border-bottom: none; /* Removed border */
+        width: 100%;
+        font-size: 1.5rem !important;
+        font-weight: 800;
+        color: white !important; /* White Text */
+    }
+    
+    [data-theme="dark"] .navbar-custom .nav-link {
+        border-bottom: none; /* Removed border */
+        color: white !important;
+    }
+    
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .nav-link.active {
+        transform: translateX(0);
+        background: none;
+        -webkit-text-fill-color: #ffeb3b; /* Yellow text on hover */
+        color: #ffeb3b !important;
+    }
+
+    .navbar-custom .nav-link::before {
+        display: none;
+    }
+    
+    /* Toggler Styling for Mobile/Tablet */
+    .navbar-toggler {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 5px;
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+        background-color: white;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-toggler .close-icon {
+        display: none;
+        color: white;
+    }
+
+    /* When menu is open (expanded) */
+    .navbar-toggler[aria-expanded="true"] {
+        background-color: transparent;
+        border-color: white;
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+        display: none;
+    }
+
+    .navbar-toggler[aria-expanded="true"] .close-icon {
+        display: block;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 140px 0 80px; /* Adjusted padding */
+        text-align: center;
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); /* Less steep angle */
+    }
+    
+    .hero-section h1 {
+        font-size: 2.2rem; /* Smaller heading */
+    }
+    
+    .hero-section .lead {
+        font-size: 1rem;
+    }
+    
+    /* Population Clock Mobile */
+    #population_count {
+        font-size: 2rem; /* Smaller numbers */
+    }
+    
+    #birth_count, #death_count {
+        font-size: 1.5rem;
+    }
+    
+    /* Hide some brand text on very small screens if needed, or adjust size */
+    .brand-section img {
+        height: 40px !important;
+    }
+    
+    .brand-section span {
+        font-size: 0.65rem !important; /* Smaller text */
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-custom {
+        padding: 0 !important; /* Remove navbar padding to let brand section touch edges */
+    }
+
+    .brand-section {
+        max-width: 85%; /* Ensure space for toggler */
+        padding: 0.5rem 1rem 0.5rem 0.5rem !important;
+        border-bottom-right-radius: 40px !important; /* More pronounced curve */
+        background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%) !important; /* Solid blue gradient like screenshot */
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 10;
+    }
+    
+    .brand-section img {
+        height: 35px !important; /* Slightly smaller logo */
+        margin-right: 0.5rem !important;
+    }
+
+    /* Toggler Styling for Mobile (Small Screens) */
+    .navbar-toggler {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 5px;
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+        background-color: white;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-toggler .close-icon {
+        display: none;
+        color: white;
+    }
+
+    /* When menu is open (expanded) */
+    .navbar-toggler[aria-expanded="true"] {
+        background-color: transparent;
+        border-color: white;
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+        display: none;
+    }
+
+    .navbar-toggler[aria-expanded="true"] .close-icon {
+        display: block;
+        font-size: 1.5rem;
+    }
+    
+    /* Population Clock Mobile Fixes */
+    .display-4 {
+        font-size: 1.5rem !important; /* Significantly smaller clock font */
+    }
+
+    .clock-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        width: 95%; /* Prevent overflowing screen width */
+        max-width: 100%;
+        margin: 0 auto 1.5rem; /* Center and add bottom margin */
+        flex-wrap: wrap; /* Allow wrapping if needed */
+        gap: 0.5rem; /* Add gap for wrapped items */
+    }
+
+    #current_time {
+        min-width: auto !important; /* Allow width to shrink */
+        font-size: 1.4rem !important; /* Fix clock overflow */
+        letter-spacing: 2px !important; /* Reduce letter spacing on mobile */
+    }
+
+    /* Fix header overflow */
+    section h2.text-white {
+        font-size: 1.3rem; /* Smaller title */
+        word-wrap: break-word; /* Ensure text wraps */
+        padding: 0 10px; /* Prevent touching edges */
+    }
+}
+
+/* Population Clock Card Styles */
+.bg-opacity-10 {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.border-opacity-10 {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.tracking-wider {
+    letter-spacing: 0.05em;
+}
+
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Organizational Chart Tree CSS */
+.org-tree ul {
+    padding-top: 20px; 
+    position: relative;
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+}
+
+.org-tree li {
+    float: left; text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 10px 0 10px;
+    transition: all 0.5s;
+}
+
+/* We will use ::before and ::after to draw the connectors */
+.org-tree li::before, .org-tree li::after {
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    right: 50%;
+    border-top: 2px solid #ccc;
+    width: 50%; 
+    height: 20px;
+}
+
+.org-tree li::after {
+    right: auto; 
+    left: 50%;
+    border-left: 2px solid #ccc;
+}
+
+[data-theme="dark"] .org-tree li::before, 
+[data-theme="dark"] .org-tree li::after,
+[data-theme="dark"] .org-tree ul ul::before,
+[data-theme="dark"] .org-tree li:last-child::before {
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* We need to remove left-right connectors from elements without any siblings */
+.org-tree li:only-child::after, .org-tree li:only-child::before {
+    display: none;
+}
+
+/* Remove space from the top of single children */
+.org-tree li:only-child { 
+    padding-top: 0;
+}
+
+/* Remove left connector from first child and right connector from last child */
+.org-tree li:first-child::before, .org-tree li:last-child::after {
+    border: 0 none;
+}
+
+/* Adding back the vertical connector to the last nodes */
+.org-tree li:last-child::before{
+    border-right: 2px solid #ccc;
+    border-radius: 0 5px 0 0;
+}
+
+.org-tree li:first-child::after{
+    border-radius: 5px 0 0 0;
+}
+
+/* Time to add downward connectors from parents */
+.org-tree ul ul::before{
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 50%;
+    border-left: 2px solid #ccc;
+    width: 0; 
+    height: 20px;
+}
+
+.org-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    display: inline-block;
+    min-width: 180px;
+    max-width: 220px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+    position: relative;
+    z-index: 2;
+}
+
+[data-theme="dark"] .org-card {
+    background: var(--bg-white);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.org-card:hover {
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    border-color: var(--primary-light);
+}
+
+.org-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid var(--bg-light);
+}
+
+.org-card h6 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--primary-dark);
+}
+
+[data-theme="dark"] .org-card h6 {
+    color: var(--primary-light);
+}
+
+.org-card p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.org-role-badge {
+    background: var(--primary-color);
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+/* Poster Marquee Styles */
+.marquee-wrapper {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 20px 0;
+}
+
+.marquee-content {
+    display: inline-flex;
+    animation: scrollLeft 40s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+@keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.poster-item {
+    width: 350px;
+    flex-shrink: 0;
+    padding: 0 15px;
+}
+
+.poster-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: white;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+[data-theme="dark"] .poster-card {
+    background: var(--bg-white); /* Dark bg */
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.poster-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.poster-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(13, 71, 161, 0.15);
+    border-color: rgba(13, 71, 161, 0.2);
+    z-index: 10;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .poster-card:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border-color: var(--primary-light);
+}
+
+.poster-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(13, 71, 161, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.poster-overlay i {
+    font-size: 2rem;
+    color: white;
+    background: rgba(255,255,255,0.2);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.poster-card:hover .poster-overlay {
+    opacity: 1;
+}
+
+.poster-card:hover .poster-overlay i {
+    transform: scale(1);
+}
+
+@media (max-width: 768px) {
+    .poster-item {
+        width: 280px;
+        padding: 0 10px;
+    }
+    .marquee-wrapper {
+        padding: 15px 0;
+    }
+}

@@ -1,0 +1,43 @@
+/* Additions for Custom Header Style */
+.brand-section {
+    position: relative;
+    z-index: 10;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+}
+
+.navbar-custom .nav-link {
+    color: var(--primary-color) !important;
+    font-size: 0.95rem;
+}
+
+.navbar-custom .nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+.dropdown-menu {
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+}
+
+@media (max-width: 991px) {
+    .brand-section {
+        border-bottom-right-radius: 0 !important;
+        width: 100%;
+        padding-right: 20px !important;
+    }
+    
+    .navbar-collapse {
+        background: white;
+        padding: 20px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+}
