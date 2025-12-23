@@ -212,6 +212,13 @@ require_once '../config/database.php';
                 
                 <li class="nav-item mt-4">
                     <div class="px-4 mb-2 text-white-50 small text-uppercase fw-bold" style="font-size: 0.75rem;">Akun</div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'ganti_password.php' ? 'active' : ''; ?>" href="ganti_password.php">
+                        <i class="bi bi-key"></i> Ganti Password
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-danger" href="logout.php">
                         <i class="bi bi-box-arrow-right"></i> Logout
                     </a>
