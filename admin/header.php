@@ -209,6 +209,11 @@ require_once '../config/database.php';
                         <i class="bi bi-images"></i> Galeri Foto
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'poster.php' ? 'active' : ''; ?>" href="poster.php">
+                        <i class="bi bi-easel"></i> Galeri Edukasi
+                    </a>
+                </li>
                 
                 <li class="nav-item mt-4">
                     <div class="px-4 mb-2 text-white-50 small text-uppercase fw-bold" style="font-size: 0.75rem;">Akun</div>

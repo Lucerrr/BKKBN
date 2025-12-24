@@ -29,7 +29,7 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
             <div class="brand-section d-flex align-items-center py-2 ps-3 pe-4" style="background: linear-gradient(135deg, #0056b3 0%, #0088ff 100%); border-bottom-right-radius: 50px; min-height: 80px; flex-shrink: 0; max-width: 100%;">
                 <a class="navbar-brand d-flex align-items-center me-0" href="index.php">
                     <!-- Logo Muna Barat -->
-                    <img src="assets/img/logo.webp" alt="Logo BKKBN" class="me-3" style="height: 50px;">
+                    <img src="assets/img/logo.png" alt="Logo BKKBN" class="me-3 bg-white rounded-circle p-1" style="height: 50px; width: 50px; object-fit: contain;">
                     
                     <!-- Teks Instansi -->
                     <div class="d-flex flex-column text-white lh-sm me-3">

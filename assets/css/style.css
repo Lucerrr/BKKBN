@@ -258,6 +258,41 @@ h1, h2, h3, h4, h5, h6 {
     100% { left: 200%; }
 }
 
+/* Global Background Watermark Logo */
+body::after {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px; /* Reduced from 800px */
+    height: 90%;
+    max-height: 400px; /* Reduced from 800px */
+    background-image: url('../img/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.05; /* More transparent as requested */
+    z-index: -1; /* Behind content to prevent stacking issues */
+    pointer-events: none;
+    filter: drop-shadow(0 0 30px rgba(13, 71, 161, 0.1));
+    animation: breatheWatermark 8s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    body::after {
+        max-width: 250px; /* Even smaller for mobile */
+        max-height: 250px;
+        opacity: 0.03; /* Very subtle on mobile */
+    }
+}
+
+@keyframes breatheWatermark {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
 /* Hero Section */
 .hero-section {
     position: relative;

@@ -1,7 +1,8 @@
 <?php include 'includes/navbar.php'; ?>
 
 <!-- Hero Section -->
-<header class="hero-section text-center">
+<header class="hero-section text-center position-relative overflow-hidden">
+    
     <div class="container position-relative" style="z-index: 2;">
         <h1 class="display-3 fw-bold mb-4">Mewujudkan Keluarga Berkualitas</h1>
         <p class="lead mb-5 mx-auto" style="max-width: 800px;">
@@ -72,13 +73,15 @@
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
                 <div class="card h-100 border-0 shadow-sm overflow-hidden group">
                     <div class="position-relative overflow-hidden" style="height: 220px;">
-                        <?php if ($news['gambar']): ?>
-                            <img src="uploads/<?php echo $news['gambar']; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform duration-500" alt="<?php echo $news['judul']; ?>">
-                        <?php else: ?>
-                            <div class="bg-light w-100 h-100 d-flex align-items-center justify-content-center text-muted">
-                                <i class="bi bi-image fs-1"></i>
-                            </div>
-                        <?php endif; ?>
+                        <a href="<?php echo !empty($news['link_sumber']) ? $news['link_sumber'] : 'detail_berita.php?id='.$news['id']; ?>" class="d-block w-100 h-100">
+                            <?php if ($news['gambar']): ?>
+                                <img src="uploads/<?php echo $news['gambar']; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform duration-500" alt="<?php echo $news['judul']; ?>">
+                            <?php else: ?>
+                                <div class="bg-light w-100 h-100 d-flex align-items-center justify-content-center text-muted">
+                                    <i class="bi bi-image fs-1"></i>
+                                </div>
+                            <?php endif; ?>
+                        </a>
                     </div>
                     <div class="card-body p-4 d-flex flex-column">
                         <h5 class="card-title mb-3">
@@ -122,89 +125,47 @@
 
             <!-- Marquee Track -->
             <div class="marquee-content d-inline-flex align-items-center">
-                <!-- Original Items -->
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_dua_anak.png', 'Dua Anak Cukup')">
-                        <img src="assets/img/poster_dua_anak.png" alt="Dua Anak Cukup">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_stunting.png', 'Cegah Stunting')">
-                        <img src="assets/img/poster_stunting.png" alt="Cegah Stunting">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_keluarga.png', 'Keluarga Sehat')">
-                        <img src="assets/img/poster_keluarga.png" alt="Keluarga Sehat">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_tumbuh_sehat.png', 'Tumbuh Sehat')">
-                        <img src="assets/img/poster_tumbuh_sehat.png" alt="Tumbuh Sehat">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_kebiasaan_baik.png', 'Kebiasaan Baik')">
-                        <img src="assets/img/poster_kebiasaan_baik.png" alt="Kebiasaan Baik">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                // Ambil data galeri dari database
+                $q_galeri = mysqli_query($conn, "SELECT * FROM poster_edukasi ORDER BY id DESC");
+                $galeri_items = [];
+                if ($q_galeri) {
+                    while ($row = mysqli_fetch_assoc($q_galeri)) {
+                        $galeri_items[] = $row;
+                    }
+                }
 
-                <!-- Duplicate Items for Infinite Loop -->
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_dua_anak.png', 'Dua Anak Cukup')">
-                        <img src="assets/img/poster_dua_anak.png" alt="Dua Anak Cukup">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_stunting.png', 'Cegah Stunting')">
-                        <img src="assets/img/poster_stunting.png" alt="Cegah Stunting">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_keluarga.png', 'Keluarga Sehat')">
-                        <img src="assets/img/poster_keluarga.png" alt="Keluarga Sehat">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_tumbuh_sehat.png', 'Tumbuh Sehat')">
-                        <img src="assets/img/poster_tumbuh_sehat.png" alt="Tumbuh Sehat">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="poster-item">
-                    <div class="poster-card" onclick="showPoster('assets/img/poster_kebiasaan_baik.png', 'Kebiasaan Baik')">
-                        <img src="assets/img/poster_kebiasaan_baik.png" alt="Kebiasaan Baik">
-                        <div class="poster-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </div>
-                </div>
+                // Jika database kosong, tampilkan pesan kosong atau biarkan kosong
+                if (empty($galeri_items)) {
+                    // Default poster dihapus sesuai permintaan agar bisa diisi manual
+                }
+
+                // Loop 2x untuk efek marquee infinite scroll (hanya jika ada data)
+                if (!empty($galeri_items)) {
+                    for ($i = 0; $i < 2; $i++) {
+                        foreach ($galeri_items as $item) {
+                            // Tentukan path gambar
+                            if (isset($item['is_local']) && $item['is_local']) {
+                                $img_src = $item['gambar'];
+                            } else {
+                                $img_src = 'uploads/' . $item['gambar'];
+                            }
+                            ?>
+                            <div class="poster-item">
+                                <div class="poster-card" onclick="showPoster('<?php echo $img_src; ?>', '<?php echo htmlspecialchars($item['judul']); ?>')">
+                                    <img src="<?php echo $img_src; ?>" alt="<?php echo htmlspecialchars($item['judul']); ?>">
+                                    <div class="poster-overlay">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                } else {
+                    echo '<div class="text-center w-100 py-5 text-muted">Belum ada poster edukasi. Silakan upload melalui Admin Panel.</div>';
+                }
+                ?>
             </div>
         </div>
 
