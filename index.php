@@ -203,6 +203,25 @@
 
 
 
+<?php
+// Calculate Initial Population Clock Values (Server-Side) to prevent "jumping" numbers
+// Data Proyeksi 2025
+$START_POP_2025 = 283039291;
+$REAL_BIRTH_RATE = 0.1446;
+$REAL_DEATH_RATE = 0.0550;
+$REAL_POP_RATE = 0.0896;
+
+$now = time();
+$current_year = date('Y');
+$start_of_year = strtotime("$current_year-01-01");
+$seconds_this_year = $now - $start_of_year;
+
+// Projection Logic
+$init_population = $START_POP_2025 + ($seconds_this_year * $REAL_POP_RATE);
+$init_births = $seconds_this_year * $REAL_BIRTH_RATE;
+$init_deaths = $seconds_this_year * $REAL_DEATH_RATE;
+?>
+
 <!-- Population Clock -->
 <section class="py-5 border-top position-relative" style="overflow: hidden;">
     <!-- Background Shape -->
@@ -218,7 +237,7 @@
             <!-- Real-time Clock Display (Moved to Top) -->
             <div class="clock-container d-inline-flex align-items-center justify-content-center bg-white bg-opacity-10 rounded-4 px-3 px-md-5 py-3 border border-white border-opacity-25 backdrop-blur-md shadow-lg mb-4">
                 <i class="bi bi-clock-history me-2 me-md-3 fs-2 text-warning"></i> 
-                <span id="current_time" class="display-4 fw-bold font-monospace text-white tracking-widest" style="min-width: 220px;"></span> 
+                <span id="current_time" class="display-4 fw-bold font-monospace text-white tracking-widest" style="min-width: 220px;"><?php echo date('H:i:s'); ?></span> 
                 <span class="ms-2 ms-md-3 h4 mb-0 text-white-50 fw-bold">WITA</span>
             </div>
             
@@ -228,21 +247,21 @@
             <div class="col-md-4">
                 <div class="p-4 bg-white rounded-4 border-0 shadow-lg h-100 position-relative overflow-hidden hover-lift">
                     <div class="position-absolute top-0 start-0 w-100 h-1 bg-primary opacity-25"></div>
-                    <div class="display-5 fw-bold font-monospace mb-2 text-primary" id="population_count">285,803,303</div>
+                    <div class="display-5 fw-bold font-monospace mb-2 text-primary" id="population_count"><?php echo number_format($init_population, 0, ',', '.'); ?></div>
                     <div class="text-muted small text-uppercase tracking-wider fw-bold">Jumlah Penduduk Saat Ini</div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="p-4 bg-white rounded-4 border-0 shadow-lg h-100 position-relative overflow-hidden hover-lift">
                     <div class="position-absolute top-0 start-0 w-100 h-1 bg-success opacity-25"></div>
-                    <div class="display-6 fw-bold font-monospace mb-2 text-success" id="birth_count">4,460,638</div>
+                    <div class="display-6 fw-bold font-monospace mb-2 text-success" id="birth_count"><?php echo number_format($init_births, 0, ',', '.'); ?></div>
                     <div class="text-muted small text-uppercase tracking-wider fw-bold">Kelahiran Tahun Ini</div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="p-4 bg-white rounded-4 border-0 shadow-lg h-100 position-relative overflow-hidden hover-lift">
                     <div class="position-absolute top-0 start-0 w-100 h-1 bg-danger opacity-25"></div>
-                    <div class="display-6 fw-bold font-monospace mb-2 text-danger" id="death_count">1,697,545</div>
+                    <div class="display-6 fw-bold font-monospace mb-2 text-danger" id="death_count"><?php echo number_format($init_deaths, 0, ',', '.'); ?></div>
                     <div class="text-muted small text-uppercase tracking-wider fw-bold">Kematian Tahun Ini</div>
                 </div>
             </div>
@@ -252,39 +271,75 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Base data (approximate starting values)
-    let population = 285803303;
-    let births = 4460638;
-    let deaths = 1697545;
+    // 1. Initialize from PHP-calculated values (Seamless Handover)
+    // These variables come directly from the server-side calculation above
+    let population = <?php echo $init_population; ?>;
+    let births = <?php echo $init_births; ?>;
+    let deaths = <?php echo $init_deaths; ?>;
+    
+    // 2. Growth Rates (Same as PHP side)
+    const REAL_BIRTH_RATE = 0.1446;
+    const REAL_DEATH_RATE = 0.0550;
+    const REAL_POP_RATE = 0.0896;
+    
+    // Speed factor 1 = Real-time
+    const speedFactor = 1; 
 
-    // Growth rates per second (calculated from yearly data)
-    // Births/sec: 4,460,638 / (365*24*60*60) = ~0.141
-    // Deaths/sec: 1,697,545 / (365*24*60*60) = ~0.053
-    // Net Growth/sec: ~0.088
-    const birthRate = 0.141;
-    const deathRate = 0.053;
-    const popRate = 0.088;
+    // Previous integer values to check for changes
+    let lastPop = Math.floor(population);
+    let lastBirth = Math.floor(births);
+    let lastDeath = Math.floor(deaths);
+
+    // Current Year for Reset Check
+    const currentYear = new Date().getFullYear();
 
     function updateClock() {
-        // Update counts
-        population += popRate;
-        births += birthRate;
-        deaths += deathRate;
+        // Add growth per 'tick' (100ms)
+        population += (REAL_POP_RATE * speedFactor) / 10;
+        births += (REAL_BIRTH_RATE * speedFactor) / 10;
+        deaths += (REAL_DEATH_RATE * speedFactor) / 10;
 
-        // Format and display
-        document.getElementById('population_count').innerText = Math.floor(population).toLocaleString('id-ID');
-        document.getElementById('birth_count').innerText = Math.floor(births).toLocaleString('id-ID');
-        document.getElementById('death_count').innerText = Math.floor(deaths).toLocaleString('id-ID');
+        // Update DOM only if integer value changes
+        const currPop = Math.floor(population);
+        const currBirth = Math.floor(births);
+        const currDeath = Math.floor(deaths);
+
+        if (currPop !== lastPop) {
+            updateNumber('population_count', currPop);
+            lastPop = currPop;
+        }
+        if (currBirth !== lastBirth) {
+            updateNumber('birth_count', currBirth);
+            lastBirth = currBirth;
+        }
+        if (currDeath !== lastDeath) {
+            updateNumber('death_count', currDeath);
+            lastDeath = currDeath;
+        }
 
         // Update time
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('id-ID', { timeZone: 'Asia/Makassar' });
+        const nowLoop = new Date();
+        const timeString = nowLoop.toLocaleTimeString('id-ID', { timeZone: 'Asia/Makassar' });
         document.getElementById('current_time').innerText = timeString;
+        
+        // Auto-reload on New Year
+        if (nowLoop.getFullYear() > currentYear) {
+             location.reload(); 
+        }
     }
 
-    // Update every second
-    setInterval(updateClock, 1000);
-    updateClock(); // Initial call
+    function updateNumber(id, value) {
+        const el = document.getElementById(id);
+        el.innerText = value.toLocaleString('id-ID');
+        el.classList.remove('pulse-text');
+        void el.offsetWidth; // trigger reflow
+        el.classList.add('pulse-text');
+    }
+
+    // Update every 100ms for smooth calculation
+    setInterval(updateClock, 100);
+    // Note: We do NOT call updateClock() immediately to avoid double-incrementing on load
+    // The initial PHP values are already displayed correctly.
 });
 
 // Poster Modal Script

@@ -974,3 +974,13 @@ body::after {
         padding: 15px 0;
     }
 }
+
+@keyframes pulse-text {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; color: var(--accent-color); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.pulse-text {
+    animation: pulse-text 0.2s ease-in-out;
+}
