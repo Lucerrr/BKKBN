@@ -984,3 +984,14 @@ body::after {
 .pulse-text {
     animation: pulse-text 0.2s ease-in-out;
 }
+
+/* Footer Shape Fill Dark Mode Fix */
+.shape-fill {
+    fill: #FFFFFF;
+    transition: fill 0.3s ease;
+}
+
+[data-theme="dark"] .shape-fill {
+    fill: #1e293b; /* Slightly lighter than body bg to be visible */
+    fill-opacity: 0.1; /* Make it subtle */
+}

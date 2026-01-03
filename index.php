@@ -216,8 +216,11 @@ $current_year = date('Y');
 $start_of_year = strtotime("$current_year-01-01");
 $seconds_this_year = $now - $start_of_year;
 
-// Projection Logic
+// Projection Logic (Menggunakan data sensus 2025 sebagai base)
+// Angka dasar 2025 + pertumbuhan sejak awal tahun ini
 $init_population = $START_POP_2025 + ($seconds_this_year * $REAL_POP_RATE);
+
+// Kelahiran dan kematian dihitung dari awal tahun berjalan (reset tiap 1 Jan)
 $init_births = $seconds_this_year * $REAL_BIRTH_RATE;
 $init_deaths = $seconds_this_year * $REAL_DEATH_RATE;
 ?>
