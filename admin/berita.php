@@ -286,7 +286,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             .then(data => {
                 if (data.success) {
                     document.getElementById('judul').value = data.title || '';
-                    document.getElementById('isi').value = data.description || '';
+                    // Gunakan content jika ada, jika tidak fallback ke description
+                    document.getElementById('isi').value = data.content || data.description || '';
                     document.getElementById('link_sumber').value = url;
                     
                     if (data.image) {
@@ -310,7 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             })
             .catch(error => {
                 console.error('Error:', error);
-                statusDiv.innerHTML = '<span class="text-danger small">Terjadi kesalahan koneksi.</span>';
+                statusDiv.innerHTML = '<span class="text-danger small"><i class="bi bi-x-circle me-1"></i>' + error.message + '</span>';
             });
     }
     </script>

@@ -93,17 +93,28 @@ $total_visitors = $d_total['count'];
                     </li>
                     <li class="d-flex mb-3">
                         <i class="bi bi-clock me-3 text-secondary mt-1"></i>
-                        <span>
-                            Senin - Kamis: 08:00 - 16:00 WITA<br>
-                            Jumat: 08:00 - 16:30 WITA
-                        </span>
+                        <div class="w-100">
+                            <span class="d-block mb-2">Jam Operasional:</span>
+                            <div class="d-flex justify-content-between mb-1 small border-bottom border-secondary border-opacity-25 pb-1">
+                                <span class="text-white-50">Senin - Kamis</span>
+                                <span class="text-white fw-bold">08:00 - 16:00</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1 small border-bottom border-secondary border-opacity-25 pb-1">
+                                <span class="text-white-50">Jumat</span>
+                                <span class="text-white fw-bold">08:00 - 11:00</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span class="text-white-50">Sabtu - Minggu</span>
+                                <span class="text-danger fw-bold">LIBUR</span>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
 
         <!-- Statistik Pengunjung Bar -->
-        <div class="row mb-4 justify-content-center">
+        <!-- <div class="row mb-4 justify-content-center">
             <div class="col-lg-8 col-md-10">
                 <div class="bg-white text-dark rounded-3 p-3 d-md-flex justify-content-between align-items-center shadow-sm" style="font-size: 0.85rem;">
                     <div class="d-flex align-items-center mb-2 mb-md-0">
@@ -132,7 +143,7 @@ $total_visitors = $d_total['count'];
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         
         <!-- Decorative Curve Divider -->
         <div class="position-relative my-5">

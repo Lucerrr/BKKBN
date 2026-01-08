@@ -45,7 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('Data pejabat berhasil disimpan'); window.location='pejabat.php';</script>";
+        echo "<script>
+            alert('Data pejabat berhasil disimpan');
+            window.location='pejabat.php';
+        </script>";
     } else {
         $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>Gagal menyimpan data!</strong> '.mysqli_error($conn).'

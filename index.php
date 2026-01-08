@@ -6,7 +6,7 @@
     <div class="container position-relative" style="z-index: 2;">
         <h1 class="display-3 fw-bold mb-4">Mewujudkan Keluarga Berkualitas</h1>
         <p class="lead mb-5 mx-auto" style="max-width: 800px;">
-            Selamat Datang di Website Resmi Badan Kependudukan dan Keluarga Berencana Nasional Kabupaten Muna Barat. Bersama kita bangun masa depan yang lebih baik.
+            Selamat datang di Website Resmi Badan Kependudukan dan Keluarga Berencana Nasional Kabupaten Muna Barat. Bersama mewujudkan keluarga sehat, sejahtera, dan berdaya saing.
         </p>
         <div class="d-flex justify-content-center gap-3">
             <a href="profil.php" class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm"><i class="bi bi-info-circle me-2"></i> Tentang Kami</a>
@@ -35,11 +35,11 @@
                 </div>
             </div>
             <div class="col-lg-7" data-aos="fade-left">
-                <span class="text-primary fw-bold text-uppercase tracking-wider">Sambutan Kepala Badan</span>
-                <h2 class="display-6 fw-bold mb-4 text-dark">Selamat Datang di Portal Resmi</h2>
+                <span class="text-primary fw-bold text-uppercase tracking-wider">Sambutan Kepala Dinas</span>
+                <h2 class="display-6 fw-bold mb-4 text-dark">Selamat Datang di Portal Resmi BKKBN Muna Barat</h2>
                 <div class="p-4 bg-light rounded-3 border-start border-4 border-primary shadow-sm">
                     <p class="lead fst-italic mb-0 text-secondary">
-                        "<?php echo $site_profil['sambutan_kepala'] ?? 'Selamat datang di website resmi BKKBN Kabupaten Muna Barat...'; ?>"
+                        "<?php echo $site_profil['sambutan_kepala'] ?? 'Selamat datang di website resmi Badan Kependudukan dan Keluarga Berencana Nasional (BKKBN) Kabupaten Muna Barat. Website ini kami hadirkan sebagai sarana informasi dan komunikasi kepada masyarakat dalam mendukung terwujudnya keluarga berkualitas, sehat, dan sejahtera melalui program Bangga Kencana.'; ?>"
                     </p>
                 </div>
                 <div class="mt-4">

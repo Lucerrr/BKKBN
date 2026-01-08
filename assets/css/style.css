@@ -27,8 +27,8 @@
     --accent-color: #ffb74d;
     --text-dark: #f1f5f9; /* Slate 100 */
     --text-muted: #94a3b8; /* Slate 400 */
-    --bg-light: #1e293b; /* Slate 800 */
-    --bg-white: #0f172a; /* Slate 900 */
+    --bg-light: #0f172a; /* Slate 900 - Darker */
+    --bg-white: #1e293b; /* Slate 800 - Lighter for cards */
     --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
@@ -128,12 +128,20 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-dark);
 }
 
+[data-theme="dark"] .border {
+    border-color: rgba(255,255,255,0.1) !important;
+}
+
 [data-theme="dark"] .text-dark {
     color: var(--text-dark) !important;
 }
 
 [data-theme="dark"] .text-muted {
     color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .text-secondary {
+    color: #cbd5e1 !important; /* Slate 300 - Much lighter than default gray */
 }
 
 [data-theme="dark"] .text-black {
@@ -167,26 +175,45 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Force Table Text to be Dark/Visible in Dark Mode IF background is failing to be dark, or just ensure high contrast */
-/* Actually, based on user feedback "semakin tidak kelihatan" (even less visible), it means white text on white bg. */
-/* If the card background is white (which it seems to be in the screenshot), we must make text DARK */
-
 [data-theme="dark"] .card {
-    background-color: var(--bg-white); /* #0f172a */
-    border-color: rgba(255,255,255,0.1);
-}
-
-/* If the card background is successfully dark (#0f172a), then text should be white. */
-/* But the screenshot shows WHITE background. */
-/* This means the [data-theme="dark"] .card rule is NOT APPLYING or being overridden. */
-/* Let's force it with !important to ensure dark background */
-[data-theme="dark"] .card {
-    background-color: #0f172a !important; 
+    background-color: var(--bg-white) !important; /* #1e293b */
     border-color: rgba(255,255,255,0.1) !important;
 }
 
-/* Now that we forced background to be dark, we can safely set text to be light */
 [data-theme="dark"] .card-body {
     color: #f1f5f9 !important;
+}
+
+/* Fix List Group Items in Dark Mode */
+[data-theme="dark"] .list-group-item {
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+    border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Fix Alerts in Dark Mode */
+[data-theme="dark"] .alert-light {
+    background-color: rgba(255,255,255,0.05) !important;
+    color: var(--text-dark) !important;
+    border-color: rgba(255,255,255,0.1) !important;
+}
+
+[data-theme="dark"] .alert-warning {
+    background-color: rgba(255, 152, 0, 0.15) !important;
+    color: #ffcc80 !important;
+    border-color: rgba(255, 152, 0, 0.2) !important;
+}
+
+[data-theme="dark"] .alert-success {
+    background-color: rgba(46, 125, 50, 0.15) !important;
+    color: #a5d6a7 !important;
+    border-color: rgba(46, 125, 50, 0.2) !important;
+}
+
+[data-theme="dark"] .alert-danger {
+    background-color: rgba(211, 47, 47, 0.15) !important;
+    color: #ef9a9a !important;
+    border-color: rgba(211, 47, 47, 0.2) !important;
 }
 
 [data-theme="dark"] .table {
@@ -258,26 +285,33 @@ h1, h2, h3, h4, h5, h6 {
     100% { left: 200%; }
 }
 
-/* Global Background Watermark Logo */
+/* Global Background Watermark Logo - FIXED */
 body::after {
     content: '';
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 400px; /* Reduced from 800px */
-    height: 90%;
-    max-height: 400px; /* Reduced from 800px */
+    width: 100vw; /* Use Viewport Width */
+    height: 100vh; /* Use Viewport Height */
     background-image: url('../img/logo.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
-    opacity: 0.05; /* More transparent as requested */
-    z-index: -1; /* Behind content to prevent stacking issues */
+    background-size: 500px; /* Fixed size, not responsive to container */
+    opacity: 0.03; /* Very subtle */
+    z-index: -1;
     pointer-events: none;
-    filter: drop-shadow(0 0 30px rgba(13, 71, 161, 0.1));
-    animation: breatheWatermark 8s ease-in-out infinite;
+}
+
+/* Ensure content sections have solid backgrounds or relative positioning */
+section {
+    position: relative;
+    z-index: 1; /* Place content ABOVE the watermark */
+}
+
+/* Fix Hero Sections to not be transparent if they shouldn't */
+.page-header {
+    z-index: 2; /* Ensure header is above everything */
 }
 
 @media (max-width: 768px) {

@@ -9,7 +9,7 @@
                 <div class="card shadow-sm border-0 p-4">
                     <h3><i class="bi bi-building text-primary me-2"></i> Tentang Kami</h3>
                     <p class="lead mt-3">
-                        Dinas Pengendalian Penduduk dan Keluarga Berencana (BKKBN) Kabupaten Muna Barat adalah instansi pemerintah yang bertanggung jawab dalam pelaksanaan urusan pemerintahan di bidang pengendalian penduduk dan keluarga berencana.
+                        Badan Kependudukan dan Keluarga Berencana Kabupaten Muna Barat merupakan perangkat daerah yang melaksanakan urusan pemerintahan di bidang pengendalian penduduk dan penyelenggaraan program keluarga berencana. Dinas ini berperan dalam mendukung terwujudnya keluarga berkualitas melalui perencanaan, pelayanan, serta pembinaan kepada masyarakat.
                     </p>
                 </div>
             </div>
@@ -68,18 +68,28 @@
                                 $kepala = findPejabat($pejabat, 'Kepala Dinas');
                                 // 2. Sekretaris
                                 $sekretaris = findPejabat($pejabat, 'Sekretaris');
-                                // 3. Kepala Bidang (Semua yang mengandung kata 'Bidang')
-                                $bidangs = findPejabatMulti($pejabat, 'Bidang');
+                                
+                                // 3. Sisanya (Kepala Bidang, Kasubag, dll)
+                                $bawahan = [];
+                                foreach($pejabat as $p) {
+                                    // Skip jika ini Kepala Dinas atau Sekretaris
+                                    if (isset($kepala['id']) && $p['id'] == $kepala['id']) continue;
+                                    if (isset($sekretaris['id']) && $p['id'] == $sekretaris['id']) continue;
+                                    
+                                    $bawahan[] = $p;
+                                }
                                 ?>
                                 
                                 <!-- Level 1: Kepala Dinas -->
                                 <li>
                                     <div class="org-card border-primary border-2">
                                         <?php if ($kepala): ?>
-                                            <?php if($kepala['foto']): ?>
+                                            <?php if(!empty($kepala['foto']) && file_exists('uploads/'.$kepala['foto'])): ?>
                                                 <img src="uploads/<?php echo $kepala['foto']; ?>" alt="<?php echo $kepala['nama']; ?>">
                                             <?php else: ?>
-                                                <img src="assets/img/kepala_dinas_placeholder.jpg" alt="Placeholder">
+                                                <div class="bg-light d-flex align-items-center justify-content-center mx-auto mb-2 rounded-circle" style="width: 80px; height: 80px; border: 3px solid var(--bg-light);">
+                                                    <i class="bi bi-person-badge text-primary fs-1"></i>
+                                                </div>
                                             <?php endif; ?>
                                             <div class="org-role-badge">Kepala Dinas</div>
                                             <h6><?php echo $kepala['nama']; ?></h6>
@@ -89,16 +99,18 @@
                                         <?php endif; ?>
                                     </div>
 
-                                    <?php if ($sekretaris || !empty($bidangs)): ?>
+                                    <?php if ($sekretaris || !empty($bawahan)): ?>
                                     <ul>
-                                        <!-- Level 2: Sekretaris -->
+                                        <!-- Level 2: Sekretaris (Sendirian di Level ini) -->
                                         <li>
                                             <div class="org-card">
                                                 <?php if ($sekretaris): ?>
-                                                    <?php if($sekretaris['foto']): ?>
+                                                    <?php if(!empty($sekretaris['foto']) && file_exists('uploads/'.$sekretaris['foto'])): ?>
                                                         <img src="uploads/<?php echo $sekretaris['foto']; ?>" alt="<?php echo $sekretaris['nama']; ?>">
                                                     <?php else: ?>
-                                                        <img src="assets/img/user_placeholder.png" alt="Placeholder" style="background: #eee;">
+                                                        <div class="bg-light d-flex align-items-center justify-content-center mx-auto mb-2 rounded-circle" style="width: 80px; height: 80px; border: 3px solid var(--bg-light);">
+                                                            <i class="bi bi-person text-secondary fs-1"></i>
+                                                        </div>
                                                     <?php endif; ?>
                                                     <div class="org-role-badge bg-info">Sekretaris</div>
                                                     <h6><?php echo $sekretaris['nama']; ?></h6>
@@ -108,21 +120,21 @@
                                                 <?php endif; ?>
                                             </div>
 
-                                            <?php if (!empty($bidangs)): ?>
+                                            <?php if (!empty($bawahan)): ?>
                                             <ul>
-                                                <!-- Level 3: Bidang-Bidang -->
-                                                <?php foreach($bidangs as $bidang): ?>
+                                                <!-- Level 3: Kepala Bidang & Anggota Lain (Sejajar di Bawah Sekretaris) -->
+                                                <?php foreach($bawahan as $staff): ?>
                                                 <li>
                                                     <div class="org-card">
-                                                        <?php if($bidang['foto']): ?>
-                                                            <img src="uploads/<?php echo $bidang['foto']; ?>" alt="<?php echo $bidang['nama']; ?>">
+                                                        <?php if(!empty($staff['foto']) && file_exists('uploads/'.$staff['foto'])): ?>
+                                                            <img src="uploads/<?php echo $staff['foto']; ?>" alt="<?php echo $staff['nama']; ?>">
                                                         <?php else: ?>
                                                             <div class="bg-light d-flex align-items-center justify-content-center mx-auto mb-2 rounded-circle" style="width: 80px; height: 80px; border: 3px solid var(--bg-light);">
                                                                 <i class="bi bi-person text-secondary fs-1"></i>
                                                             </div>
                                                         <?php endif; ?>
-                                                        <div class="org-role-badge bg-secondary"><?php echo $bidang['jabatan']; ?></div>
-                                                        <h6><?php echo $bidang['nama']; ?></h6>
+                                                        <div class="org-role-badge bg-secondary"><?php echo $staff['jabatan']; ?></div>
+                                                        <h6><?php echo $staff['nama']; ?></h6>
                                                     </div>
                                                 </li>
                                                 <?php endforeach; ?>
