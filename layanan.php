@@ -7,49 +7,6 @@
         <div class="row">
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm border-0">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0"><i class="bi bi-hospital me-2"></i> Pelayanan KB</h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="mb-4">BKKBN Kabupaten Muna Barat menyediakan Pelayanan Keluarga Berencana (KB) yang aman, berkualitas, dan terjangkau bagi masyarakat sebagai upaya mewujudkan keluarga sehat dan sejahtera.</p>
-                        
-                        <div class="list-group list-group-flush">
-                            <div class="list-group-item px-0 border-bottom">
-                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Pemasangan IUD (Spiral)</h6>
-                                <p class="mb-0 text-muted small ps-4">Metode kontrasepsi jangka panjang yang efektif dan aman.</p>
-                            </div>
-                            <div class="list-group-item px-0 border-bottom">
-                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Pemasangan Implan (Susuk)</h6>
-                                <p class="mb-0 text-muted small ps-4">Kontrasepsi jangka panjang untuk mencegah kehamilan dengan tingkat keberhasilan tinggi.</p>
-                            </div>
-                            <div class="list-group-item px-0 border-bottom">
-                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Suntik KB</h6>
-                                <p class="mb-0 text-muted small ps-4">Metode kontrasepsi hormonal yang praktis dan mudah digunakan.</p>
-                            </div>
-                            <div class="list-group-item px-0 border-bottom">
-                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Pil KB</h6>
-                                <p class="mb-0 text-muted small ps-4">Kontrasepsi oral untuk membantu perencanaan kehamilan secara teratur.</p>
-                            </div>
-                            <div class="list-group-item px-0 border-bottom">
-                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Kondom</h6>
-                                <p class="mb-0 text-muted small ps-4">Alat kontrasepsi yang berfungsi mencegah kehamilan serta melindungi dari infeksi menular seksual.</p>
-                            </div>
-                            <div class="list-group-item px-0">
-                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Konseling Kesehatan Reproduksi</h6>
-                                <p class="mb-0 text-muted small ps-4">Layanan konsultasi bagi pasangan usia subur terkait perencanaan keluarga dan kesehatan reproduksi.</p>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-light border-start border-4 border-primary mt-4 mb-0" role="alert">
-                            <i class="bi bi-info-circle-fill text-primary me-2"></i>
-                            <span class="small fst-italic">Pelayanan KB dilaksanakan melalui kerja sama dengan fasilitas pelayanan kesehatan seperti puskesmas, klinik, dan tenaga kesehatan yang berkompeten.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm border-0">
                     <div class="card-header text-white" style="background-color: #e65100;">
                         <h4 class="mb-0"><i class="bi bi-clock me-2"></i> Jadwal Pelayanan</h4>
                     </div>
@@ -151,6 +108,49 @@
                             <div class="small fst-italic">
                                 *Jadwal dapat berubah sewaktu-waktu sesuai kondisi lapangan.
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="bi bi-hospital me-2"></i> Pelayanan KB</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-4">BKKBN Kabupaten Muna Barat menyediakan Pelayanan Keluarga Berencana (KB) yang aman, berkualitas, dan terjangkau bagi masyarakat sebagai upaya mewujudkan keluarga sehat dan sejahtera.</p>
+                        
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item px-0 border-bottom">
+                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Pemasangan IUD (Spiral)</h6>
+                                <p class="mb-0 text-muted small ps-4">Metode kontrasepsi jangka panjang yang efektif dan aman.</p>
+                            </div>
+                            <div class="list-group-item px-0 border-bottom">
+                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Pemasangan Implan (Susuk)</h6>
+                                <p class="mb-0 text-muted small ps-4">Kontrasepsi jangka panjang untuk mencegah kehamilan dengan tingkat keberhasilan tinggi.</p>
+                            </div>
+                            <div class="list-group-item px-0 border-bottom">
+                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Suntik KB</h6>
+                                <p class="mb-0 text-muted small ps-4">Metode kontrasepsi hormonal yang praktis dan mudah digunakan.</p>
+                            </div>
+                            <div class="list-group-item px-0 border-bottom">
+                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Pil KB</h6>
+                                <p class="mb-0 text-muted small ps-4">Kontrasepsi oral untuk membantu perencanaan kehamilan secara teratur.</p>
+                            </div>
+                            <div class="list-group-item px-0 border-bottom">
+                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Kondom</h6>
+                                <p class="mb-0 text-muted small ps-4">Alat kontrasepsi yang berfungsi mencegah kehamilan serta melindungi dari infeksi menular seksual.</p>
+                            </div>
+                            <div class="list-group-item px-0">
+                                <h6 class="fw-bold text-primary mb-1"><i class="bi bi-check-circle-fill me-2 small"></i>Konseling Kesehatan Reproduksi</h6>
+                                <p class="mb-0 text-muted small ps-4">Layanan konsultasi bagi pasangan usia subur terkait perencanaan keluarga dan kesehatan reproduksi.</p>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-light border-start border-4 border-primary mt-4 mb-0" role="alert">
+                            <i class="bi bi-info-circle-fill text-primary me-2"></i>
+                            <span class="small fst-italic">Pelayanan KB dilaksanakan melalui kerja sama dengan fasilitas pelayanan kesehatan seperti puskesmas, klinik, dan tenaga kesehatan yang berkompeten.</span>
                         </div>
                     </div>
                 </div>
