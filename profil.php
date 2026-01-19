@@ -1,4 +1,7 @@
-<?php include 'includes/navbar.php'; ?>
+<?php
+// Halaman yang menampilkan profil instansi, visi misi, struktur organisasi, dan daftar pejabat.
+include 'includes/navbar.php'; 
+?>
 
 <section class="py-5">
     <div class="container">

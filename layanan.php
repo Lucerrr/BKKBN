@@ -1,4 +1,7 @@
-<?php include 'includes/navbar.php'; ?>
+<?php
+// Halaman informasi layanan publik dan jadwal pelayanan.
+include 'includes/navbar.php'; 
+?>
 
 <section class="py-5">
     <div class="container">

@@ -1,4 +1,7 @@
-<?php include 'includes/navbar.php'; ?>
+<?php
+// Halaman galeri foto dokumentasi kegiatan.
+include 'includes/navbar.php'; 
+?>
 
 <section class="py-5 bg-white">
     <div class="container py-4">

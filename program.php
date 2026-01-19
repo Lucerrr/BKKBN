@@ -1,4 +1,7 @@
-<?php include 'includes/navbar.php'; ?>
+<?php
+// Halaman informasi program kerja instansi.
+include 'includes/navbar.php'; 
+?>
 
 <section class="py-5 bg-light">
     <div class="container">

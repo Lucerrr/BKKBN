@@ -1,4 +1,5 @@
 <?php
+// File konfigurasi koneksi ke database MySQL.
 $host = "localhost";
 $user = "root";
 $pass = "";

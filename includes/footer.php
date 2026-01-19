@@ -1,4 +1,5 @@
 <?php
+// Bagian kaki (footer) website yang dimuat di setiap halaman.
 // Visitor Counter Logic
 $ip_address = $_SERVER['REMOTE_ADDR'];
 $date = date('Y-m-d');

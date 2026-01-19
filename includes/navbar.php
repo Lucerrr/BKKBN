@@ -1,4 +1,5 @@
 <?php
+// Bagian navigasi atas (header) yang dimuat di setiap halaman.
 require_once 'config/database.php';
 
 // Ambil data profil untuk digunakan di header/footer

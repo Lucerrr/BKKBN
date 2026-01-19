@@ -1,4 +1,7 @@
-<?php include 'includes/navbar.php'; ?>
+<?php
+// Halaman detail untuk membaca isi lengkap sebuah berita.
+include 'includes/navbar.php'; 
+?>
 
 <?php
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;

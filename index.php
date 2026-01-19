@@ -1,4 +1,7 @@
-<?php include 'includes/navbar.php'; ?>
+<?php
+// Halaman utama website yang menampilkan slider, sambutan, program unggulan, dan statistik.
+include 'includes/navbar.php'; 
+?>
 
 <!-- Hero Section -->
 <header class="hero-section text-center position-relative overflow-hidden">
@@ -186,7 +189,6 @@
             $icons = ['bi-diagram-3', 'bi-heart-pulse', 'bi-people']; // Ikon berbeda
             $i = 0;
             while ($prog = mysqli_fetch_assoc($q_prog)):
-                $icon = $icons[$i % count($icons)];
             ?>
             <div class="col-lg-4" data-aos="fade-up" data-aos-delay="<?php echo ($i+1)*100; ?>">
                 <div class="card h-100 border-0 shadow-hover transition-all p-2 rounded-4 bg-light bg-opacity-50">
