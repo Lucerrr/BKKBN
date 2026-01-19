@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div>
             <h1 class="h2 mb-0"><?php echo ($act == 'tambah') ? 'Tambah Pejabat' : 'Edit Pejabat'; ?></h1>
-            <p class="text-muted small">Kelola data pejabat struktural organisasi.</p>
+            <p class="text-muted small">Kelola data pegawai struktural organisasi.</p>
         </div>
         <a href="pejabat.php" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left me-1"></i> Kembali
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-lg-8">
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body p-4">
-                        <h5 class="card-title fw-bold text-primary mb-4">Informasi Pejabat</h5>
+                        <h5 class="card-title fw-bold text-primary mb-4">Informasi Pegawai</h5>
                         
                         <div class="mb-3">
                             <label class="form-label fw-bold">Nama Lengkap</label>
@@ -214,11 +214,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php else: ?>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div>
-            <h1 class="h2 mb-0">Manajemen Pejabat</h1>
+            <h1 class="h2 mb-0">Manajemen Pegawai</h1>
             <p class="text-muted small">Daftar struktur organisasi dan pejabat.</p>
         </div>
         <a href="?act=tambah" class="btn btn-primary shadow-sm">
-            <i class="bi bi-person-plus-fill me-2"></i> Tambah Pejabat
+            <i class="bi bi-person-plus-fill me-2"></i> Tambah Pegawai
         </a>
     </div>
 

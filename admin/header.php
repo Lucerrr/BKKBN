@@ -15,7 +15,7 @@ require_once '../config/database.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="../assets/img/logo_baru.png?v=<?php echo time(); ?>" type="image/png">
+    <link rel="icon" href="../assets/img/logo_new_v2.png?v=<?php echo time(); ?>" type="image/png">
     <style>
         :root {
             --sidebar-width: 260px;
@@ -424,7 +424,7 @@ require_once '../config/database.php';
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <img src="../assets/img/logo_baru.png" alt="Logo">
+            <img src="../assets/img/logo_new_v2.png" alt="Logo">
             <span>Admin Panel</span>
         </div>
         
@@ -457,7 +457,7 @@ require_once '../config/database.php';
 
             <a href="pejabat.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'pejabat.php' ? 'active' : ''; ?>">
                 <i class="bi bi-people"></i>
-                <span>Manajemen Pejabat</span>
+                <span>Manajemen Pegawai</span>
             </a>
             <a href="profil.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'profil.php' ? 'active' : ''; ?>">
                 <i class="bi bi-building"></i>

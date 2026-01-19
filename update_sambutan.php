@@ -1,7 +1,7 @@
 <?php
 require_once 'config/database.php';
 
-$sambutan = "Selamat datang di website resmi Badan Kependudukan dan Keluarga Berencana Nasional (BKKBN) Kabupaten Muna Barat. Website ini kami hadirkan sebagai sarana informasi dan komunikasi kepada masyarakat dalam mendukung terwujudnya keluarga berkualitas, sehat, dan sejahtera melalui program Bangga Kencana.";
+$sambutan = "Selamat datang di website resmi Dinas Pengendalian Penduduk dan Keluarga Berencana/BKKBN Muna Barat. Website ini kami hadirkan sebagai sarana informasi dan komunikasi kepada masyarakat dalam mendukung terwujudnya keluarga berkualitas, sehat, dan sejahtera melalui program Bangga Kencana.";
 $sambutan = mysqli_real_escape_string($conn, $sambutan);
 
 // Cek apakah key sudah ada

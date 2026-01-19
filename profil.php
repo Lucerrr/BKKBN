@@ -9,7 +9,7 @@
                 <div class="card shadow-sm border-0 p-4">
                     <h3><i class="bi bi-building text-primary me-2"></i> Tentang Kami</h3>
                     <p class="lead mt-3">
-                        Badan Kependudukan dan Keluarga Berencana Kabupaten Muna Barat merupakan perangkat daerah yang melaksanakan urusan pemerintahan di bidang pengendalian penduduk dan penyelenggaraan program keluarga berencana. Dinas ini berperan dalam mendukung terwujudnya keluarga berkualitas melalui perencanaan, pelayanan, serta pembinaan kepada masyarakat.
+                        Dinas Pengendalian Penduduk dan Keluarga Berencana/BKKBN Muna Barat merupakan perangkat daerah yang melaksanakan urusan pemerintahan di bidang pengendalian penduduk dan penyelenggaraan program keluarga berencana. Dinas ini berperan dalam mendukung terwujudnya keluarga berkualitas melalui perencanaan, pelayanan, serta pembinaan kepada masyarakat.
                     </p>
                 </div>
             </div>

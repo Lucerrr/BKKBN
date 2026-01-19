@@ -4,7 +4,7 @@ $urls = [
     'https://kominfo.munabarat.go.id/wp-content/uploads/2022/10/cropped-logo-mubar-1.png'
 ];
 
-$target = 'c:/xamppp/htdocs/BKKBN/assets/img/logo-muna-barat.png';
+$target = __DIR__ . '/assets/img/logo-muna-barat.png';
 $dir = dirname($target);
 if (!is_dir($dir)) {
     mkdir($dir, 0777, true);

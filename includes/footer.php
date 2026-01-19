@@ -53,7 +53,7 @@ $total_visitors = $d_total['count'];
     <div class="container pt-5 position-relative" style="z-index: 2;">
         <div class="row gy-4 mb-5">
             <div class="col-lg-5 col-md-12 mb-4 mb-lg-0">
-                <h5 class="text-white mb-4">Badan Kependudukan dan Keluarga Berencana Nasional Muna Barat</h5>
+                <h5 class="text-white mb-4">Dinas Pengendalian Penduduk dan Keluarga Berencana/BKKBN Muna Barat</h5>
                 <p class="mb-4 text-muted" style="max-width: 400px;">
                     Berkomitmen untuk mewujudkan keluarga berkualitas dan pertumbuhan penduduk yang seimbang demi masa depan yang lebih baik.
                 </p>

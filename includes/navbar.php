@@ -17,7 +17,7 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="icon" href="assets/img/logo_baru.png?v=<?php echo time(); ?>" type="image/png">
+    <link rel="icon" href="assets/img/logo_new_v2.png?v=<?php echo time(); ?>" type="image/png">
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
 </head>
 <body>
@@ -29,21 +29,21 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
             <div class="brand-section d-flex align-items-center py-2 ps-3 pe-4" style="background: linear-gradient(135deg, #0056b3 0%, #0088ff 100%); border-bottom-right-radius: 50px; flex-shrink: 0; max-width: 100%;">
                 <a class="navbar-brand d-flex align-items-center me-0" href="index.php">
                     <!-- Logo Muna Barat -->
-                    <img src="assets/img/logo.png" alt="Logo BKKBN" class="me-2 bg-white rounded-circle p-1 logo-img" style="object-fit: contain;">
+                    <img src="assets/img/logo_new_v2.png?v=<?php echo time(); ?>" alt="Logo BKKBN" class="me-2 p-1 logo-img" style="object-fit: contain; border-radius: 8px;">
                     
                     <!-- Teks Instansi -->
                     <div class="d-flex flex-column text-white lh-sm me-3">
                         <!-- Desktop View -->
                         <div class="d-none d-md-block">
-                            <span class="d-block" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px;">BADAN KEPENDUDUKAN DAN</span>
-                            <span class="d-block" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px;">KELUARGA BERENCANA NASIONAL</span>
-                            <span class="d-block" style="font-size: 0.9rem; font-weight: 800; color: #ffeb3b; margin-top: 2px;">KABUPATEN MUNA BARAT</span>
+                            <span class="d-block" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px;">DINAS PENGENDALIAN PENDUDUK</span>
+                            <span class="d-block" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px;">DAN KELUARGA BERENCANA</span>
+                            <span class="d-block" style="font-size: 0.9rem; font-weight: 800; color: #ffeb3b; margin-top: 2px;">BKKBN MUNA BARAT</span>
                         </div>
                         <!-- Mobile View -->
                         <div class="d-md-none">
-                            <span class="d-block text-uppercase" style="font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2;">BADAN KEPENDUDUKAN DAN</span>
-                            <span class="d-block text-uppercase" style="font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2;">KELUARGA BERENCANA NASIONAL</span>
-                            <span class="d-block text-uppercase text-warning" style="font-size: 0.55rem; font-weight: 800; margin-top: 2px;">KABUPATEN MUNA BARAT</span>
+                            <span class="d-block text-uppercase" style="font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2;">DINAS PENGENDALIAN PENDUDUK</span>
+                            <span class="d-block text-uppercase" style="font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2;">DAN KELUARGA BERENCANA</span>
+                            <span class="d-block text-uppercase text-warning" style="font-size: 0.55rem; font-weight: 800; margin-top: 2px;">BKKBN MUNA BARAT</span>
                         </div>
                     </div>
                 </a>
@@ -136,6 +136,7 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
         if (savedTheme === 'dark') {
             updateThemeUI(true);
         } else {
+            // Default to light mode (ignore system preference to keep consistency)
             updateThemeUI(false);
         }
 

@@ -117,11 +117,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="login-card">
         <div class="text-center mb-4">
-            <div class="bg-primary bg-opacity-10 d-inline-flex p-3 rounded-circle mb-3 text-primary">
-                <i class="bi bi-shield-lock-fill fs-1"></i>
+            <div class="d-inline-flex p-3 mb-3">
+                <img src="../assets/img/logo_new_v2.png" alt="Logo" style="width: 80px; height: 80px; object-fit: contain;">
             </div>
             <h3 class="brand-logo mb-0">Admin Panel</h3>
-            <p class="brand-subtitle">BKKBN Kabupaten Muna Barat</p>
+            <p class="brand-subtitle mt-2 mb-4">
+                Dinas Pengendalian Penduduk dan Keluarga Berencana/BKKBN Muna Barat
+            </p>
         </div>
 
         <?php if($error): ?>

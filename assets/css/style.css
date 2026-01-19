@@ -271,7 +271,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .logo-img {
     height: 50px;
-    width: 50px;
+    width: auto;
+    max-width: 80px;
 }
 
 .brand-section::after {
@@ -301,13 +302,14 @@ body::after {
     transform: translate(-50%, -50%);
     width: 100vw; /* Use Viewport Width */
     height: 100vh; /* Use Viewport Height */
-    background-image: url('../img/logo.png');
+    background-image: url('../img/logo_new_v2.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 500px; /* Fixed size, not responsive to container */
-    opacity: 0.03; /* Very subtle */
+    background-size: 500px auto; /* Fixed size for desktop */
+    opacity: 0.08; /* Increased opacity from 0.03 to 0.08 */
     z-index: -1;
     pointer-events: none;
+    animation: breatheWatermark 10s infinite ease-in-out;
 }
 
 /* Ensure content sections have solid backgrounds or relative positioning */
@@ -323,9 +325,8 @@ section {
 
 @media (max-width: 768px) {
     body::after {
-        max-width: 250px; /* Even smaller for mobile */
-        max-height: 250px;
-        opacity: 0.03; /* Very subtle on mobile */
+        background-size: 280px auto; /* Smaller size for mobile to prevent cropping */
+        opacity: 0.08; /* Increased opacity for mobile too */
     }
 }
 
