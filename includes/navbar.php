@@ -26,10 +26,10 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
     <div class="container-fluid p-0">
         <div class="d-flex align-items-center h-100 w-100">
             <!-- Left Side: Brand Section with Gradient -->
-            <div class="brand-section d-flex align-items-center py-2 ps-3 pe-4" style="background: linear-gradient(135deg, #0056b3 0%, #0088ff 100%); border-bottom-right-radius: 50px; min-height: 80px; flex-shrink: 0; max-width: 100%;">
+            <div class="brand-section d-flex align-items-center py-2 ps-3 pe-4" style="background: linear-gradient(135deg, #0056b3 0%, #0088ff 100%); border-bottom-right-radius: 50px; flex-shrink: 0; max-width: 100%;">
                 <a class="navbar-brand d-flex align-items-center me-0" href="index.php">
                     <!-- Logo Muna Barat -->
-                    <img src="assets/img/logo.png" alt="Logo BKKBN" class="me-3 bg-white rounded-circle p-1" style="height: 50px; width: 50px; object-fit: contain;">
+                    <img src="assets/img/logo.png" alt="Logo BKKBN" class="me-2 bg-white rounded-circle p-1 logo-img" style="object-fit: contain;">
                     
                     <!-- Teks Instansi -->
                     <div class="d-flex flex-column text-white lh-sm me-3">
@@ -56,15 +56,6 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
                     <i class="bi bi-x-lg close-icon"></i>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end me-lg-4" id="navbarNav">
-                    <!-- Inline style override to ensure padding on mobile -->
-                    <style>
-                        @media (max-width: 991.98px) {
-                            #navbarNav {
-                                padding-top: 150px !important;
-                                justify-content: flex-start !important;
-                            }
-                        }
-                    </style>
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item"><a class="nav-link px-3 fw-bold" href="index.php">Beranda</a></li>
                         <li class="nav-item"><a class="nav-link px-3 fw-bold" href="profil.php">Profil</a></li>
@@ -75,9 +66,17 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
                         <li class="nav-item"><a class="nav-link px-3 fw-bold" href="kontak.php">Kontak Kami</a></li>
                         <!-- Night Mode Toggle -->
                         <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-                            <button class="btn btn-link nav-link px-3 w-100 text-start text-lg-center" id="theme-toggle" title="Ganti Mode Tampilan" style="cursor: pointer;">
-                                <span class="d-lg-none me-2 fw-bold">Mode Tampilan</span>
-                                <i class="bi bi-moon-stars-fill" id="theme-icon"></i>
+                            <button class="btn btn-link nav-link px-3 w-100 d-flex align-items-center justify-content-between justify-content-lg-center" id="theme-toggle" title="Ganti Mode Tampilan" style="cursor: pointer;">
+                                <div class="d-flex align-items-center d-lg-none">
+                                    <i class="bi bi-palette-fill me-2 text-primary"></i>
+                                    <span class="fw-bold">Ganti Tema</span>
+                                </div>
+                                <div class="d-flex align-items-center bg-light rounded-pill px-2 py-1 border d-lg-none">
+                                    <span class="small me-2 text-muted" id="theme-text">Terang</span>
+                                    <i class="bi bi-moon-stars-fill text-primary" id="theme-icon-mobile"></i>
+                                </div>
+                                <!-- Desktop Icon Only -->
+                                <i class="bi bi-moon-stars-fill d-none d-lg-block" id="theme-icon"></i>
                             </button>
                         </li>
                     </ul>
@@ -92,28 +91,62 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
     document.addEventListener('DOMContentLoaded', function() {
         const toggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
+        const themeIconMobile = document.getElementById('theme-icon-mobile');
+        const themeText = document.getElementById('theme-text');
         const html = document.documentElement;
         
+        function updateThemeUI(isDark) {
+            if (isDark) {
+                html.setAttribute('data-theme', 'dark');
+                // Desktop Icon
+                if(themeIcon) {
+                    themeIcon.classList.remove('bi-moon-stars-fill');
+                    themeIcon.classList.add('bi-sun-fill');
+                }
+                // Mobile Icon
+                if(themeIconMobile) {
+                    themeIconMobile.classList.remove('bi-moon-stars-fill');
+                    themeIconMobile.classList.add('bi-sun-fill');
+                    themeIconMobile.classList.remove('text-primary');
+                    themeIconMobile.classList.add('text-warning');
+                }
+                // Mobile Text
+                if(themeText) themeText.textContent = 'Gelap';
+            } else {
+                html.removeAttribute('data-theme');
+                // Desktop Icon
+                if(themeIcon) {
+                    themeIcon.classList.remove('bi-sun-fill');
+                    themeIcon.classList.add('bi-moon-stars-fill');
+                }
+                // Mobile Icon
+                if(themeIconMobile) {
+                    themeIconMobile.classList.remove('bi-sun-fill');
+                    themeIconMobile.classList.add('bi-moon-stars-fill');
+                    themeIconMobile.classList.remove('text-warning');
+                    themeIconMobile.classList.add('text-primary');
+                }
+                // Mobile Text
+                if(themeText) themeText.textContent = 'Terang';
+            }
+        }
+
         // Check saved preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
-            html.setAttribute('data-theme', 'dark');
-            themeIcon.classList.remove('bi-moon-stars-fill');
-            themeIcon.classList.add('bi-sun-fill');
+            updateThemeUI(true);
+        } else {
+            updateThemeUI(false);
         }
 
         toggleBtn.addEventListener('click', function() {
             const currentTheme = html.getAttribute('data-theme');
             if (currentTheme === 'dark') {
-                html.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
-                themeIcon.classList.remove('bi-sun-fill');
-                themeIcon.classList.add('bi-moon-stars-fill');
+                updateThemeUI(false);
             } else {
-                html.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
-                themeIcon.classList.remove('bi-moon-stars-fill');
-                themeIcon.classList.add('bi-sun-fill');
+                updateThemeUI(true);
             }
         });
     });

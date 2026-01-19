@@ -13,19 +13,19 @@
                     <div class="mt-4">
                         <div class="d-flex align-items-center mb-3">
                             <i class="bi bi-geo-alt-fill fs-4 me-3"></i>
-                            <span><?php echo $site_profil['alamat'] ?? 'Guali, Kec. Kusambi, Kabupaten Muna, Sulawesi Tenggara 93653'; ?></span>
+                            <span class="text-white"><?php echo $site_profil['alamat'] ?? 'Guali, Kec. Kusambi, Kabupaten Muna, Sulawesi Tenggara 93653'; ?></span>
                         </div>
                         <div class="d-flex align-items-center mb-3">
                             <i class="bi bi-telephone-fill fs-4 me-3"></i>
-                            <span><?php echo $site_profil['telepon'] ?? '-'; ?></span>
+                            <a href="tel:<?php echo $site_profil['telepon'] ?? ''; ?>" class="text-white text-decoration-none"><?php echo $site_profil['telepon'] ?? '-'; ?></a>
                         </div>
                         <div class="d-flex align-items-center mb-3">
                             <i class="bi bi-envelope-fill fs-4 me-3"></i>
-                            <span><?php echo $site_profil['email'] ?? 'bkkbn@munabarat.go.id'; ?></span>
+                            <a href="mailto:<?php echo $site_profil['email'] ?? ''; ?>" class="text-white text-decoration-none"><?php echo $site_profil['email'] ?? 'bkkbn@munabarat.go.id'; ?></a>
                         </div>
                         <div class="d-flex align-items-center mb-3">
                             <i class="bi bi-clock-fill fs-4 me-3"></i>
-                            <span>Senin - Jumat, 08:00 - 16:00 WITA</span>
+                            <span class="text-white">Senin - Jumat, 08:00 - 16:00 WITA</span>
                         </div>
                     </div>
                 </div>
