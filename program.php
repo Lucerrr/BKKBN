@@ -1,6 +1,6 @@
 <?php include 'includes/navbar.php'; ?>
 
-<section class="py-5">
+<section class="py-5 bg-light">
     <div class="container">
         <h1 class="text-center mb-5 section-title">Program Kerja</h1>
         
@@ -27,8 +27,10 @@
         <!-- Program List -->
         <div class="row g-4">
             <?php
-            $q = mysqli_query($conn, "SELECT * FROM program ORDER BY id ASC");
-            while ($row = mysqli_fetch_assoc($q)):
+            if (isset($conn)) {
+                $q = mysqli_query($conn, "SELECT * FROM program ORDER BY id ASC");
+                if ($q) {
+                    while ($row = mysqli_fetch_assoc($q)):
             ?>
             <div class="col-md-6 mb-4">
                 <div class="card h-100 border-0 shadow-sm hover-shadow transition-all rounded-4">
@@ -40,16 +42,24 @@
                                 </div>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h5 class="card-title fw-bold text-dark mb-3"><?php echo $row['judul']; ?></h5>
+                                <h5 class="card-title fw-bold text-dark mb-3"><?php echo htmlspecialchars($row['judul']); ?></h5>
                                 <p class="card-text text-muted mb-0" style="text-align: justify;">
-                                    <?php echo nl2br($row['deskripsi']); ?>
+                                    <?php echo nl2br(htmlspecialchars($row['deskripsi'])); ?>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php endwhile; ?>
+            <?php 
+                    endwhile;
+                } else {
+                    echo '<div class="col-12 text-center text-danger">Gagal memuat program kerja.</div>';
+                }
+            } else {
+                echo '<div class="col-12 text-center text-danger">Koneksi database bermasalah.</div>';
+            }
+            ?>
         </div>
     </div>
 </section>

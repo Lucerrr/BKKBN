@@ -38,6 +38,7 @@ body {
     font-family: 'Inter', sans-serif;
     color: var(--text-dark);
     background-color: #f0f4f8; /* Darker than white/very light gray */
+    padding-top: 80px; /* Space for fixed navbar */
     background-image: 
         radial-gradient(at 0% 0%, hsla(210,100%,96%,1) 0, transparent 50%), 
         radial-gradient(at 100% 0%, hsla(217,100%,96%,1) 0, transparent 50%), 
@@ -266,7 +267,20 @@ h1, h2, h3, h4, h5, h6 {
 .brand-section {
     position: relative;
     overflow: hidden;
-    min-height: 80px; /* Default desktop height */
+    min-height: 80px;
+    background-color: var(--primary-color);
+    /* Modern Geometric/Wave Pattern */
+    background-image: 
+        radial-gradient(circle at 100% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 10px),
+        linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+    /* Organic Wave Shape */
+    border-bottom-right-radius: 80px 60px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    flex-shrink: 0; 
+    max-width: 100%;
+    z-index: 1020;
 }
 
 .logo-img {
@@ -300,8 +314,8 @@ body::after {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw; /* Use Viewport Width */
-    height: 100vh; /* Use Viewport Height */
+    width: 100%; /* Changed from 100vw to 100% to prevent scrollbar overflow */
+    height: 100%; /* Changed from 100vh to 100% */
     background-image: url('../img/logo_new_v2.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -316,6 +330,13 @@ body::after {
 section {
     position: relative;
     z-index: 1; /* Place content ABOVE the watermark */
+}
+
+/* Prevent horizontal scroll globally */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
 /* Fix Hero Sections to not be transparent if they shouldn't */
@@ -338,7 +359,7 @@ section {
 /* Hero Section */
 .hero-section {
     position: relative;
-    padding: 180px 0 100px; /* More padding top for fixed navbar */
+    padding: 100px 0 100px; /* Adjusted for fixed navbar + body padding */
     overflow: hidden;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     /* New Attractive Background */
@@ -628,8 +649,12 @@ section {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-top: 60px; /* Smaller navbar on mobile */
+    }
+
     .hero-section {
-        padding: 140px 0 80px; /* Adjusted padding */
+        padding: 80px 0 80px; /* Adjusted padding */
         text-align: center;
         clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); /* Less steep angle */
     }
@@ -669,8 +694,12 @@ section {
     .brand-section {
         max-width: 85%; /* Ensure space for toggler */
         padding: 0.5rem 1rem 0.5rem 0.5rem !important;
-        border-bottom-right-radius: 40px !important; /* More pronounced curve */
-        background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%) !important; /* Solid blue gradient like screenshot */
+        border-bottom-right-radius: 60px 40px !important; /* More organic curve on mobile */
+        /* Use same pattern as desktop but adjusted */
+        background: 
+            radial-gradient(circle at 100% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+            repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 10px),
+            linear-gradient(135deg, #0d47a1 0%, #1976d2 100%) !important;
         box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
         position: relative;
         z-index: 10;
@@ -1045,6 +1074,36 @@ section {
 
 .pulse-text {
     animation: pulse-text 0.2s ease-in-out;
+}
+
+/* Active Day Row Highlighting */
+.active-day-row {
+    background-color: rgba(13, 110, 253, 0.15) !important; /* Increased opacity for visibility */
+    border: 2px solid rgba(13, 110, 253, 0.3) !important;
+    box-shadow: inset 0 0 10px rgba(13, 110, 253, 0.05);
+}
+
+.active-day-row-danger {
+    background-color: rgba(220, 53, 69, 0.15) !important; /* Increased opacity for visibility */
+    border: 2px solid rgba(220, 53, 69, 0.3) !important;
+    box-shadow: inset 0 0 10px rgba(220, 53, 69, 0.05);
+}
+
+/* Dark Mode Support for Active Rows */
+[data-theme="dark"] .active-day-row {
+    background-color: rgba(13, 110, 253, 0.25) !important;
+    border-color: rgba(13, 110, 253, 0.5) !important;
+}
+
+[data-theme="dark"] .active-day-row-danger {
+    background-color: rgba(220, 53, 69, 0.25) !important;
+    border-color: rgba(220, 53, 69, 0.5) !important;
+}
+
+/* Service Icon Wrapper Styles */
+.icon-wrapper {
+    background-color: transparent !important; /* Remove white background */
+    border: 2px solid currentColor; /* Use text color for border */
 }
 
 /* Footer Shape Fill Dark Mode Fix */

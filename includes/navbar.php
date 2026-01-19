@@ -22,11 +22,11 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-custom sticky-top p-0">
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top p-0">
     <div class="container-fluid p-0">
         <div class="d-flex align-items-center h-100 w-100">
             <!-- Left Side: Brand Section with Gradient -->
-            <div class="brand-section d-flex align-items-center py-2 ps-3 pe-4" style="background: linear-gradient(135deg, #0056b3 0%, #0088ff 100%); border-bottom-right-radius: 50px; flex-shrink: 0; max-width: 100%;">
+            <div class="brand-section d-flex align-items-center py-2 ps-3 pe-5">
                 <a class="navbar-brand d-flex align-items-center me-0" href="index.php">
                     <!-- Logo Muna Barat -->
                     <img src="assets/img/logo_new_v2.png?v=<?php echo time(); ?>" alt="Logo BKKBN" class="me-2 p-1 logo-img" style="object-fit: contain; border-radius: 8px;">

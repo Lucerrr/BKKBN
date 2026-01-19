@@ -121,8 +121,6 @@
         
         <!-- Marquee Container with Fade Edges -->
         <div class="marquee-wrapper">
-            <!-- Fade Gradients Removed -->
-
             <!-- Marquee Track -->
             <div class="marquee-content d-inline-flex align-items-center">
                 <?php
@@ -173,30 +171,41 @@
 </section>
 
 <!-- Program Highlights -->
-<section class="py-5 bg-light position-relative">
+<section class="py-5 bg-white position-relative">
     <div class="container py-4">
         <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="section-title">Program Unggulan</h2>
-            <p class="text-muted mx-auto" style="max-width: 600px;">Fokus utama kami dalam meningkatkan kualitas hidup masyarakat melalui program-program strategis.</p>
+            <span class="d-inline-block py-1 px-3 rounded-pill bg-primary bg-opacity-10 text-primary fw-bold small mb-3 letter-spacing-2">PROGRAM UNGGULAN</span>
+            <h2 class="display-6 fw-bold text-dark mb-3">Fokus & Prioritas Kami</h2>
+            <div class="mx-auto bg-primary mb-4" style="height: 3px; width: 60px;"></div>
+            <p class="text-muted mx-auto fs-5" style="max-width: 600px;">Upaya strategis dalam meningkatkan kesejahteraan keluarga.</p>
         </div>
+        
         <div class="row g-4">
             <?php
             $q_prog = mysqli_query($conn, "SELECT * FROM program LIMIT 3");
+            $icons = ['bi-diagram-3', 'bi-heart-pulse', 'bi-people']; // Ikon berbeda
+            $i = 0;
             while ($prog = mysqli_fetch_assoc($q_prog)):
+                $icon = $icons[$i % count($icons)];
             ?>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="card h-100 text-center p-4 hover-lift">
-                    <div class="card-body">
-                        <div class="feature-icon-wrapper">
-                            <i class="bi bi-star-fill"></i>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="<?php echo ($i+1)*100; ?>">
+                <div class="card h-100 border-0 shadow-hover transition-all p-2 rounded-4 bg-light bg-opacity-50">
+                    <div class="card-body p-4">
+                        <div class="mb-4 d-inline-block p-3 rounded-3 bg-white shadow-sm text-primary">
+                            <i class="bi <?php echo $icon; ?> fs-2"></i>
                         </div>
-                        <h4 class="card-title text-dark"><?php echo $prog['judul']; ?></h4>
-                        <p class="card-text mb-4"><?php echo substr(strip_tags($prog['deskripsi']), 0, 120); ?>...</p>
-                        <a href="program.php" class="btn btn-outline-primary btn-sm rounded-pill px-4">Selengkapnya <i class="bi bi-arrow-right ms-1"></i></a>
+                        <h4 class="card-title fw-bold text-dark mb-3"><?php echo $prog['judul']; ?></h4>
+                        <p class="card-text text-muted mb-4" style="line-height: 1.7;"><?php echo substr(strip_tags($prog['deskripsi']), 0, 100); ?>...</p>
+                        <a href="program.php" class="btn btn-link p-0 text-decoration-none fw-bold icon-link-hover">
+                            Baca Selengkapnya <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            <?php endwhile; ?>
+            <?php 
+                $i++;
+            endwhile; 
+            ?>
         </div>
     </div>
 </section>
@@ -226,51 +235,99 @@ $init_deaths = $seconds_this_year * $REAL_DEATH_RATE;
 ?>
 
 <!-- Population Clock -->
-<section class="py-5 border-top position-relative" style="overflow: hidden;">
-    <!-- Background Shape -->
-    <div style="position: absolute; top: 10%; bottom: 10%; left: 5%; right: 5%; background: linear-gradient(135deg, #1565C0 0%, #42A5F5 100%); border-radius: 50px; transform: skewY(-2deg); z-index: 0; box-shadow: 0 10px 30px rgba(21, 101, 192, 0.3);">
-        <!-- Pattern Overlay inside Shape -->
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 25%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 25%); border-radius: 50px;"></div>
-    </div>
-    
-    <div class="container py-5 position-relative" style="z-index: 2;">
-        <div class="text-center mb-5">
-            <h2 class="text-white fw-bold text-shadow mb-4">Indonesian Population Clock</h2>
+<section class="py-5 bg-white border-top">
+    <div class="container py-4">
+        <!-- Compact Dark Card Container -->
+        <div class="position-relative rounded-5 overflow-hidden shadow-lg p-4 p-lg-5" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
             
-            <!-- Real-time Clock Display (Moved to Top) -->
-            <div class="clock-container d-inline-flex align-items-center justify-content-center bg-white bg-opacity-10 rounded-4 px-3 px-md-5 py-3 border border-white border-opacity-25 backdrop-blur-md shadow-lg mb-4">
-                <i class="bi bi-clock-history me-2 me-md-3 fs-2 text-warning"></i> 
-                <span id="current_time" class="display-4 fw-bold font-monospace text-white tracking-widest" style="min-width: 220px;"><?php echo date('H:i:s'); ?></span> 
-                <span class="ms-2 ms-md-3 h4 mb-0 text-white-50 fw-bold">WITA</span>
-            </div>
+            <!-- Minimal Particles/Stars Background -->
+            <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.5;"></div>
             
-            <p class="text-white-50 text-shadow fs-5">Estimasi jumlah penduduk Indonesia secara real-time</p>
-        </div>
-        <div class="row g-4 justify-content-center text-center">
-            <div class="col-md-4">
-                <div class="p-4 bg-white rounded-4 border-0 shadow-lg h-100 position-relative overflow-hidden hover-lift">
-                    <div class="position-absolute top-0 start-0 w-100 h-1 bg-primary opacity-25"></div>
-                    <div class="display-5 fw-bold font-monospace mb-2 text-primary" id="population_count"><?php echo number_format($init_population, 0, ',', '.'); ?></div>
-                    <div class="text-muted small text-uppercase tracking-wider fw-bold">Jumlah Penduduk Saat Ini</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="p-4 bg-white rounded-4 border-0 shadow-lg h-100 position-relative overflow-hidden hover-lift">
-                    <div class="position-absolute top-0 start-0 w-100 h-1 bg-success opacity-25"></div>
-                    <div class="display-6 fw-bold font-monospace mb-2 text-success" id="birth_count"><?php echo number_format($init_births, 0, ',', '.'); ?></div>
-                    <div class="text-muted small text-uppercase tracking-wider fw-bold">Kelahiran Tahun Ini</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="p-4 bg-white rounded-4 border-0 shadow-lg h-100 position-relative overflow-hidden hover-lift">
-                    <div class="position-absolute top-0 start-0 w-100 h-1 bg-danger opacity-25"></div>
-                    <div class="display-6 fw-bold font-monospace mb-2 text-danger" id="death_count"><?php echo number_format($init_deaths, 0, ',', '.'); ?></div>
-                    <div class="text-muted small text-uppercase tracking-wider fw-bold">Kematian Tahun Ini</div>
+            <!-- Abstract Shapes -->
+            <div style="position: absolute; top: -50px; right: -50px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); border-radius: 50%; z-index: 0;"></div>
+            <div style="position: absolute; bottom: -50px; left: -50px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); border-radius: 50%; z-index: 0;"></div>
+
+            <div class="position-relative" style="z-index: 2;">
+                <div class="row align-items-center g-4">
+                    <!-- Left Side: Title & Clock -->
+                    <div class="col-lg-5 text-center text-lg-start">
+                        <h3 class="text-white fw-bold mb-3">Indonesian Population Clock</h3>
+                        <p class="text-white-50 mb-4">Estimasi jumlah penduduk Indonesia secara real-time</p>
+                        
+                        <div class="d-inline-flex align-items-center bg-white bg-opacity-10 rounded-pill px-4 py-3 border border-white border-opacity-25 backdrop-blur-sm shadow-sm">
+                            <i class="bi bi-clock me-3 text-info fs-4"></i>
+                            <span id="current_time" class="h3 fw-bold font-monospace text-white mb-0"><?php echo date('H:i:s'); ?></span>
+                            <span class="ms-3 small text-info fw-bold">WITA</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Stats Cards -->
+                    <div class="col-lg-7">
+                        <div class="row g-3">
+                            <!-- Total Population -->
+                            <div class="col-md-4">
+                                <div class="p-3 bg-dark bg-opacity-25 rounded-4 border border-white border-opacity-10 h-100 text-center hover-glow-primary backdrop-blur-sm shadow-sm transition-transform hover-scale">
+                                    <div class="mb-2 text-primary bg-white bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-people-fill fs-4"></i>
+                                    </div>
+                                    <div class="h5 fw-bold font-monospace text-white mb-1" id="population_count"><?php echo number_format($init_population, 0, ',', '.'); ?></div>
+                                    <div class="text-white-50 small fw-bold tracking-wider" style="font-size: 0.7rem;">TOTAL PENDUDUK</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Births -->
+                            <div class="col-md-4">
+                                <div class="p-3 bg-dark bg-opacity-25 rounded-4 border border-white border-opacity-10 h-100 text-center hover-glow-success backdrop-blur-sm shadow-sm transition-transform hover-scale">
+                                    <div class="mb-2 text-success bg-white bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-person-plus-fill fs-4"></i>
+                                    </div>
+                                    <div class="h5 fw-bold font-monospace text-white mb-1" id="birth_count"><?php echo number_format($init_births, 0, ',', '.'); ?></div>
+                                    <div class="text-white-50 small fw-bold tracking-wider" style="font-size: 0.7rem;">KELAHIRAN TAHUN INI</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Deaths -->
+                            <div class="col-md-4">
+                                <div class="p-3 bg-dark bg-opacity-25 rounded-4 border border-white border-opacity-10 h-100 text-center hover-glow-danger backdrop-blur-sm shadow-sm transition-transform hover-scale">
+                                    <div class="mb-2 text-danger bg-white bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-person-dash-fill fs-4"></i>
+                                    </div>
+                                    <div class="h5 fw-bold font-monospace text-white mb-1" id="death_count"><?php echo number_format($init_deaths, 0, ',', '.'); ?></div>
+                                    <div class="text-white-50 small fw-bold tracking-wider" style="font-size: 0.7rem;">KEMATIAN TAHUN INI</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Particles.js with balanced visibility
+    particlesJS('particles-js', {
+        "particles": {
+            "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#ffffff" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.4, "random": true }, // Balanced opacity
+            "size": { "value": 2.5, "random": true }, // Balanced size
+            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.15, "width": 1 }, // Subtle lines
+            "move": { "enable": true, "speed": 1.2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": { "onhover": { "enable": true, "mode": "grab" }, "resize": true },
+            "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.4 } } }
+        },
+        "retina_detect": true
+    });
+});
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

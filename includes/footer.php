@@ -96,13 +96,10 @@ $total_visitors = $d_total['count'];
                         <div class="w-100">
                             <span class="d-block mb-2">Jam Operasional:</span>
                             <div class="d-flex justify-content-between mb-1 small border-bottom border-secondary border-opacity-25 pb-1">
-                                <span class="text-white-50">Senin - Kamis</span>
+                                <span class="text-white-50">Senin - Jum'at</span>
                                 <span class="text-white fw-bold">08:00 - 16:00</span>
                             </div>
-                            <div class="d-flex justify-content-between mb-1 small border-bottom border-secondary border-opacity-25 pb-1">
-                                <span class="text-white-50">Jumat</span>
-                                <span class="text-white fw-bold">08:00 - 11:00</span>
-                            </div>
+                            
                             <div class="d-flex justify-content-between small">
                                 <span class="text-white-50">Sabtu - Minggu</span>
                                 <span class="text-danger fw-bold">LIBUR</span>
