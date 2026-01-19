@@ -239,8 +239,8 @@ include 'includes/navbar.php';
 
 <?php
 // Calculate Initial Population Clock Values (Server-Side) to prevent "jumping" numbers
-// Data Proyeksi 2025
-$START_POP_2025 = 283039291;
+// Data Populasi per Januari 2026 (Sesuai BPS/Worldometer)
+$START_POP_2025 = 286820000;
 $REAL_BIRTH_RATE = 0.1446;
 $REAL_DEATH_RATE = 0.0550;
 $REAL_POP_RATE = 0.0896;
