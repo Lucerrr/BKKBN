@@ -65,7 +65,7 @@ BKKBN-Mubar/
     ```php
     $host = 'localhost';
     $user = 'root';
-    $pass = ''; // Sesuaikan password database Anda
+    $pass = '';
     $db   = 'bkkbn_muna_barat';
     ```
 
