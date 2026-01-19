@@ -5,7 +5,7 @@ include 'includes/navbar.php';
 
 <section class="py-5">
     <div class="container">
-        <h1 class="text-center mb-5 section-title">Hubungi Kami</h1>
+        <h1 class="text-center mb-5 section-title">Kontak Kami</h1>
 
         <div class="row">
             <div class="col-lg-5 mb-4">

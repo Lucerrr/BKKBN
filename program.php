@@ -5,7 +5,7 @@ include 'includes/navbar.php';
 
 <section class="py-5 bg-light">
     <div class="container">
-        <h1 class="text-center mb-5 section-title">Program Kerja</h1>
+        <h1 class="text-center mb-5 section-title">Informasi Program Kerja</h1>
         
         <!-- Quote Section -->
         <div class="row justify-content-center mb-5">

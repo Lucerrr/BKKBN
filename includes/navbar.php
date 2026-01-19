@@ -62,7 +62,7 @@ while ($r = mysqli_fetch_assoc($q_prof)) {
                         <li class="nav-item"><a class="nav-link px-3 fw-bold" href="profil.php">Profil</a></li>
                         <li class="nav-item"><a class="nav-link px-3 fw-bold" href="berita.php">Berita</a></li>
                         <li class="nav-item"><a class="nav-link px-3 fw-bold" href="program.php">Informasi</a></li>
-                        <li class="nav-item"><a class="nav-link px-3 fw-bold" href="galeri.php">Publikasi</a></li>
+                        <li class="nav-item"><a class="nav-link px-3 fw-bold" href="galeri.php">Galeri</a></li>
                         <li class="nav-item"><a class="nav-link px-3 fw-bold" href="layanan.php">Layanan</a></li>
                         <li class="nav-item"><a class="nav-link px-3 fw-bold" href="kontak.php">Kontak Kami</a></li>
                         <!-- Night Mode Toggle -->

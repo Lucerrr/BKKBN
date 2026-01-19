@@ -25,11 +25,8 @@ include 'includes/navbar.php';
             <div class="col-md-4 mb-4">
                 <div class="card h-100 border-0 shadow-sm overflow-hidden hover-zoom">
                     <div class="position-relative" style="height: 250px;">
-                        <a href="uploads/<?php echo htmlspecialchars($row['gambar']); ?>" target="_blank">
+                        <a href="uploads/<?php echo htmlspecialchars($row['gambar']); ?>" target="_blank" class="d-block w-100 h-100">
                             <img src="uploads/<?php echo htmlspecialchars($row['gambar']); ?>" class="card-img-top w-100 h-100 object-fit-cover" alt="<?php echo htmlspecialchars($row['judul']); ?>">
-                            <div class="overlay-hover d-flex align-items-center justify-content-center">
-                                <i class="bi bi-zoom-in text-white fs-2"></i>
-                            </div>
                         </a>
                     </div>
                     <div class="card-body text-center">
