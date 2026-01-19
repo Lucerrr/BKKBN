@@ -174,33 +174,50 @@ include 'includes/navbar.php';
 </section>
 
 <!-- Program Highlights -->
-<section class="py-5 bg-white position-relative">
-    <div class="container py-4">
+<section class="py-5 bg-light position-relative overflow-hidden">
+    <!-- Decorative Background Blob -->
+    <div style="position: absolute; top: -10%; right: -5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(13,110,253,0.05) 0%, transparent 70%); border-radius: 50%; z-index: 0;"></div>
+    <div style="position: absolute; bottom: -10%; left: -5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(25,135,84,0.05) 0%, transparent 70%); border-radius: 50%; z-index: 0;"></div>
+
+    <div class="container py-4 position-relative" style="z-index: 1;">
         <div class="text-center mb-5" data-aos="fade-up">
-            <span class="d-inline-block py-1 px-3 rounded-pill bg-primary bg-opacity-10 text-primary fw-bold small mb-3 letter-spacing-2">PROGRAM UNGGULAN</span>
-            <h2 class="display-6 fw-bold text-dark mb-3">Fokus & Prioritas Kami</h2>
-            <div class="mx-auto bg-primary mb-4" style="height: 3px; width: 60px;"></div>
-            <p class="text-muted mx-auto fs-5" style="max-width: 600px;">Upaya strategis dalam meningkatkan kesejahteraan keluarga.</p>
+            <span class="d-inline-block py-1 px-3 rounded-pill bg-white border border-primary border-opacity-25 text-primary fw-bold small mb-3 letter-spacing-2 shadow-sm">PROGRAM UNGGULAN</span>
+            <h2 class="display-5 fw-bold text-dark mb-3">Fokus & Prioritas Kami</h2>
+            <p class="text-muted mx-auto fs-5" style="max-width: 600px;">Strategi utama dalam mewujudkan keluarga berkualitas dan sejahtera.</p>
         </div>
         
         <div class="row g-4">
             <?php
             $q_prog = mysqli_query($conn, "SELECT * FROM program LIMIT 3");
-            $icons = ['bi-diagram-3', 'bi-heart-pulse', 'bi-people']; // Ikon berbeda
+            $colors = ['primary', 'success', 'info']; 
+            $icons = ['bi-diagram-3-fill', 'bi-heart-pulse-fill', 'bi-people-fill'];
             $i = 0;
             while ($prog = mysqli_fetch_assoc($q_prog)):
+                $color = $colors[$i % count($colors)];
+                $icon = $icons[$i % count($icons)];
+                $delay = ($i + 1) * 100;
             ?>
-            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="<?php echo ($i+1)*100; ?>">
-                <div class="card h-100 border-0 shadow-hover transition-all p-2 rounded-4 bg-light bg-opacity-50">
-                    <div class="card-body p-4">
-                        <div class="mb-4 d-inline-block p-3 rounded-3 bg-white shadow-sm text-primary">
-                            <i class="bi <?php echo $icon; ?> fs-2"></i>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
+                <div class="card h-100 border-0 shadow-sm hover-lift-lg rounded-4 overflow-hidden group bg-white">
+                    <div class="position-relative p-4 pb-0">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="width-60 height-60 rounded-circle bg-<?php echo $color; ?> bg-opacity-10 text-<?php echo $color; ?> d-flex align-items-center justify-content-center shadow-sm group-hover-scale transition-transform">
+                                <i class="bi <?php echo $icon; ?> fs-3"></i>
+                            </div>
+                            <span class="badge bg-<?php echo $color; ?> bg-opacity-10 text-<?php echo $color; ?> rounded-pill px-3 py-2 small fw-bold">Prioritas #<?php echo $i+1; ?></span>
                         </div>
-                        <h4 class="card-title fw-bold text-dark mb-3"><?php echo $prog['judul']; ?></h4>
-                        <p class="card-text text-muted mb-4" style="line-height: 1.7;"><?php echo substr(strip_tags($prog['deskripsi']), 0, 100); ?>...</p>
-                        <a href="program.php" class="btn btn-link p-0 text-decoration-none fw-bold icon-link-hover">
-                            Baca Selengkapnya <i class="bi bi-arrow-right ms-1"></i>
-                        </a>
+                    </div>
+                    <div class="card-body p-4 pt-2">
+                        <h4 class="card-title fw-bold text-dark mb-3 group-hover-text-<?php echo $color; ?> transition-colors"><?php echo $prog['judul']; ?></h4>
+                        <p class="card-text text-muted mb-4" style="line-height: 1.6; min-height: 80px;">
+                            <?php echo substr(strip_tags($prog['deskripsi']), 0, 110); ?>...
+                        </p>
+                        <div class="pt-2 border-top border-light">
+                            <a href="program.php" class="d-flex align-items-center justify-content-between text-decoration-none text-<?php echo $color; ?> fw-bold mt-2 group-hover-translate-x">
+                                <span>Pelajari Lebih Lanjut</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,6 +225,12 @@ include 'includes/navbar.php';
                 $i++;
             endwhile; 
             ?>
+        </div>
+        
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="400">
+            <a href="program.php" class="btn btn-outline-dark rounded-pill px-5 py-2 fw-bold hover-bg-primary hover-text-white transition-all">
+                Lihat Semua Program
+            </a>
         </div>
     </div>
 </section>
