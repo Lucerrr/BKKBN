@@ -38,7 +38,7 @@ include 'includes/navbar.php';
                 <div class="card h-100 border-0 shadow-sm p-2">
                     <!-- Google Maps Embed -->
                     <div class="ratio ratio-16x9">
-                        <iframe src="https://maps.google.com/maps?q=-4.748263,122.541212&hl=id&z=15&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=-4.8427743,122.447409&hl=id&z=17&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>

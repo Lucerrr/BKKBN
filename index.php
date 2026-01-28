@@ -33,7 +33,7 @@ include 'includes/navbar.php';
                     <?php if ($kepala && !empty($kepala['foto'])): ?>
                         <img src="uploads/<?php echo $kepala['foto']; ?>" class="img-fluid rounded-circle shadow-lg position-relative" alt="<?php echo $kepala['nama']; ?>" style="width: 300px; height: 300px; object-fit: cover; z-index: 1;">
                     <?php else: ?>
-                        <img src="assets/img/kepala_dinas_placeholder.jpg" class="img-fluid rounded-circle shadow-lg position-relative" alt="Kepala Badan" style="width: 300px; height: 300px; object-fit: cover; z-index: 1;">
+                        <img src="assets/img/kepala_dinas_placeholder.jpg" class="img-fluid rounded-circle shadow-lg position-relative" alt="Kepala Dinas" style="width: 300px; height: 300px; object-fit: cover; z-index: 1;">
                     <?php endif; ?>
                 </div>
             </div>
@@ -112,67 +112,6 @@ include 'includes/navbar.php';
     </div>
 </section>
 
-<!-- Poster Edukasi Marquee -->
-<section class="py-5 position-relative overflow-hidden bg-white">
-    
-    <div class="container-fluid py-4 position-relative">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-bold tracking-wider">INFORMASI PUBLIK</span>
-            <h2 class="section-title">Galeri Edukasi & Informasi</h2>
-            <p class="text-muted mx-auto" style="max-width: 600px;">Kumpulan poster edukasi dan informasi penting untuk keluarga Indonesia.</p>
-        </div>
-        
-        <!-- Marquee Container with Fade Edges -->
-        <div class="marquee-wrapper">
-            <!-- Marquee Track -->
-            <div class="marquee-content d-inline-flex align-items-center">
-                <?php
-                // Ambil data galeri dari database
-                $q_galeri = mysqli_query($conn, "SELECT * FROM poster_edukasi ORDER BY id DESC");
-                $galeri_items = [];
-                if ($q_galeri) {
-                    while ($row = mysqli_fetch_assoc($q_galeri)) {
-                        $galeri_items[] = $row;
-                    }
-                }
-
-                // Jika database kosong, tampilkan pesan kosong atau biarkan kosong
-                if (empty($galeri_items)) {
-                    // Default poster dihapus sesuai permintaan agar bisa diisi manual
-                }
-
-                // Loop 2x untuk efek marquee infinite scroll (hanya jika ada data)
-                if (!empty($galeri_items)) {
-                    for ($i = 0; $i < 2; $i++) {
-                        foreach ($galeri_items as $item) {
-                            // Tentukan path gambar
-                            if (isset($item['is_local']) && $item['is_local']) {
-                                $img_src = $item['gambar'];
-                            } else {
-                                $img_src = 'uploads/' . $item['gambar'];
-                            }
-                            ?>
-                            <div class="poster-item">
-                                <div class="poster-card" onclick="showPoster('<?php echo $img_src; ?>', '<?php echo htmlspecialchars($item['judul']); ?>')">
-                                    <img src="<?php echo $img_src; ?>" alt="<?php echo htmlspecialchars($item['judul']); ?>">
-                                    <div class="poster-overlay">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                    }
-                } else {
-                    echo '<div class="text-center w-100 py-5 text-muted">Belum ada poster edukasi. Silakan upload melalui Admin Panel.</div>';
-                }
-                ?>
-            </div>
-        </div>
-
-    </div>
-</section>
-
 <!-- Program Highlights -->
 <section class="py-5 bg-light position-relative overflow-hidden">
     <!-- Decorative Background Blob -->
@@ -235,7 +174,66 @@ include 'includes/navbar.php';
     </div>
 </section>
 
+<!-- Poster Edukasi Marquee -->
+<section class="py-5 position-relative overflow-hidden bg-white">
+    
+    <div class="container-fluid py-4 position-relative">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-bold tracking-wider">INFORMASI PUBLIK</span>
+            <h2 class="section-title">Galeri Edukasi & Informasi</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">Kumpulan poster edukasi dan informasi penting untuk keluarga Indonesia.</p>
+        </div>
+        
+        <!-- Marquee Container with Fade Edges -->
+        <div class="marquee-wrapper">
+            <!-- Marquee Track -->
+            <div class="marquee-content d-inline-flex align-items-center">
+                <?php
+                // Ambil data galeri dari database
+                $q_galeri = mysqli_query($conn, "SELECT * FROM poster_edukasi ORDER BY id DESC");
+                $galeri_items = [];
+                if ($q_galeri) {
+                    while ($row = mysqli_fetch_assoc($q_galeri)) {
+                        $galeri_items[] = $row;
+                    }
+                }
 
+                // Jika database kosong, tampilkan pesan kosong atau biarkan kosong
+                if (empty($galeri_items)) {
+                    // Default poster dihapus sesuai permintaan agar bisa diisi manual
+                }
+
+                // Loop 2x untuk efek marquee infinite scroll (hanya jika ada data)
+                if (!empty($galeri_items)) {
+                    for ($i = 0; $i < 2; $i++) {
+                        foreach ($galeri_items as $item) {
+                            // Tentukan path gambar
+                            if (isset($item['is_local']) && $item['is_local']) {
+                                $img_src = $item['gambar'];
+                            } else {
+                                $img_src = 'uploads/' . $item['gambar'];
+                            }
+                            ?>
+                            <div class="poster-item">
+                                <div class="poster-card" onclick="showPoster('<?php echo $img_src; ?>', '<?php echo htmlspecialchars($item['judul']); ?>')">
+                                    <img src="<?php echo $img_src; ?>" alt="<?php echo htmlspecialchars($item['judul']); ?>">
+                                    <div class="poster-overlay">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                } else {
+                    echo '<div class="text-center w-100 py-5 text-muted">Belum ada poster edukasi. Silakan upload melalui Admin Panel.</div>';
+                }
+                ?>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 <?php
 // Calculate Initial Population Clock Values (Server-Side) to prevent "jumping" numbers
