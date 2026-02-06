@@ -1,5 +1,99 @@
 <?php include 'header.php'; ?>
 
+<?php
+// Handle Emergency Close Logic
+if (isset($_POST['toggle_emergency_close'])) {
+    $today = date('Y-m-d');
+    $action = $_POST['action'];
+    
+    if ($action == 'close') {
+        // Upsert
+        $check = mysqli_query($conn, "SELECT id FROM profil WHERE meta_key = 'emergency_close_date'");
+        if (mysqli_num_rows($check) > 0) {
+            mysqli_query($conn, "UPDATE profil SET meta_value = '$today' WHERE meta_key = 'emergency_close_date'");
+        } else {
+            mysqli_query($conn, "INSERT INTO profil (meta_key, meta_value) VALUES ('emergency_close_date', '$today')");
+        }
+        $msg = "Pelayanan berhasil ditutup untuk hari ini. Status akan kembali normal besok.";
+    } else {
+        // Reset
+        mysqli_query($conn, "UPDATE profil SET meta_value = '' WHERE meta_key = 'emergency_close_date'");
+        $msg = "Penutupan darurat dibatalkan. Pelayanan kembali buka.";
+    }
+    
+    echo "<script>alert('$msg'); window.location='index.php';</script>";
+    exit;
+}
+
+// Check Status for Button Display
+date_default_timezone_set('Asia/Makassar');
+$current_day = date('N');
+$current_time = date('H:i');
+$today_date = date('Y-m-d');
+
+// Check Scheduled Open (Updated with Friday 11:30 rule)
+$is_scheduled_open = false;
+if ($current_day >= 1 && $current_day <= 4) { // Mon-Thu
+    if (($current_time >= '08:00' && $current_time <= '12:00') || ($current_time >= '13:00' && $current_time <= '16:00')) {
+        $is_scheduled_open = true;
+    }
+} elseif ($current_day == 5) { // Fri
+    if (($current_time >= '08:00' && $current_time <= '11:30') || ($current_time >= '13:00' && $current_time <= '16:00')) {
+        $is_scheduled_open = true;
+    }
+}
+
+// Check Emergency Status
+$q_em = mysqli_query($conn, "SELECT meta_value FROM profil WHERE meta_key = 'emergency_close_date'");
+$d_em = mysqli_fetch_assoc($q_em);
+$emergency_date = $d_em['meta_value'] ?? '';
+$is_emergency_closed = ($emergency_date == $today_date);
+?>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="fw-bold mb-1">Status Pelayanan Hari Ini</h5>
+                    <p class="text-muted mb-0">
+                        <?php 
+                        if ($is_emergency_closed) {
+                            echo '<span class="badge bg-danger">DITUTUP SEMENTARA</span> - Pelayanan ditutup manual oleh admin.';
+                        } elseif ($is_scheduled_open) {
+                            echo '<span class="badge bg-success">SEDANG BUKA</span> - Sesuai jadwal operasional.';
+                        } else {
+                            echo '<span class="badge bg-secondary">TUTUP</span> - Di luar jam operasional.';
+                        }
+                        ?>
+                    </p>
+                </div>
+                <div>
+                    <?php if ($is_emergency_closed): ?>
+                        <form method="POST" onsubmit="return confirm('Batalkan penutupan darurat? Pelayanan akan kembali dibuka.');">
+                            <input type="hidden" name="action" value="open">
+                            <button type="submit" name="toggle_emergency_close" class="btn btn-outline-success">
+                                <i class="bi bi-arrow-counterclockwise me-2"></i> Batalkan Penutupan
+                            </button>
+                        </form>
+                    <?php elseif ($is_scheduled_open): ?>
+                        <form method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menutup pelayanan hari ini? Status akan kembali normal besok.');">
+                            <input type="hidden" name="action" value="close">
+                            <button type="submit" name="toggle_emergency_close" class="btn btn-danger">
+                                <i class="bi bi-x-circle me-2"></i> Tutup Pelayanan Hari Ini
+                            </button>
+                        </form>
+                    <?php else: ?>
+                        <button class="btn btn-secondary" disabled>
+                            <i class="bi bi-clock me-2"></i> Jadwal Tutup
+                        </button>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row g-4">
     <div class="col-md-4">
         <div class="card bg-primary text-white h-100 position-relative border-0 overflow-hidden">

@@ -20,28 +20,35 @@ include 'includes/navbar.php';
                         date_default_timezone_set('Asia/Makassar'); // WITA
                         $current_day = date('N'); // 1 (Mon) to 7 (Sun)
                         $current_time = date('H:i');
+                        $today_date = date('Y-m-d');
                         $is_open = false;
-                        $status_text = "TUTUP";
+                        $status_text = "DI LUAR JAM PELAYANAN";
                         $status_class = "danger";
                         $status_icon = "bi-door-closed-fill";
 
-                        // Logic Open/Close
-                        if ($current_day >= 1 && $current_day <= 4) { // Mon-Thu
-                            if (($current_time >= '08:00' && $current_time <= '12:00') || ($current_time >= '13:00' && $current_time <= '16:00')) {
-                                $is_open = true;
-                            }
-                        } elseif ($current_day == 5) { // Fri
-                            if (($current_time >= '08:00' && $current_time <= '11:00') || ($current_time >= '13:00' && $current_time <= '16:00')) {
-                                $is_open = true;
+                        // Check Emergency Close from Profil Data
+                        $emergency_close_date = $site_profil['emergency_close_date'] ?? '';
+                        $is_emergency_closed = ($emergency_close_date == $today_date);
+
+                        if (!$is_emergency_closed) {
+                            // Logic Open/Close
+                            if ($current_day >= 1 && $current_day <= 4) { // Mon-Thu
+                                if (($current_time >= '08:00' && $current_time <= '12:00') || ($current_time >= '13:00' && $current_time <= '16:00')) {
+                                    $is_open = true;
+                                }
+                            } elseif ($current_day == 5) { // Fri
+                                if (($current_time >= '08:00' && $current_time <= '11:30') || ($current_time >= '13:00' && $current_time <= '16:00')) {
+                                    $is_open = true;
+                                }
                             }
                         }
 
                         if ($is_open) {
-                            $status_text = "SEDANG BUKA";
+                            $status_text = "DALAM JAM PELAYANAN";
                             $status_class = "success";
                             $status_icon = "bi-door-open-fill";
-                        } elseif ($current_day >= 1 && $current_day <= 5 && $current_time >= '12:00' && $current_time < '13:00') {
-                            $status_text = "ISTIRAHAT";
+                        } elseif (!$is_emergency_closed && $current_day >= 1 && $current_day <= 5 && (($current_day != 5 && $current_time >= '12:00' && $current_time < '13:00') || ($current_day == 5 && $current_time >= '11:30' && $current_time < '13:00'))) {
+                            $status_text = "PELAYANAN DALAM WAKTU ISTIRAHAT";
                             $status_class = "warning";
                             $status_icon = "bi-cup-hot-fill";
                         }
@@ -94,8 +101,8 @@ include 'includes/navbar.php';
                                         </td>
                                         <td class="py-4 text-end pe-3">
                                             <div class="d-flex flex-column align-items-end gap-1">
-                                                <span class="badge bg-success text-white shadow-sm px-3 py-2 rounded-pill fw-bold" style="min-width: 140px;">08:00 - 11:00 WITA</span>
-                                                <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25 px-2 py-1 rounded-pill fw-bold my-1" style="font-size: 0.75rem;">11:00 - 13:00 ISTIRAHAT</span>
+                                                <span class="badge bg-success text-white shadow-sm px-3 py-2 rounded-pill fw-bold" style="min-width: 140px;">08:00 - 11:30 WITA</span>
+                                                <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25 px-2 py-1 rounded-pill fw-bold my-1" style="font-size: 0.75rem;">11:30 - 13:00 ISTIRAHAT</span>
                                                 <span class="badge bg-success bg-opacity-75 text-white shadow-sm px-3 py-2 rounded-pill fw-bold" style="min-width: 140px;">13:00 - 16:00 WITA</span>
                                             </div>
                                         </td>
@@ -113,7 +120,7 @@ include 'includes/navbar.php';
                                             </div>
                                         </td>
                                         <td class="py-4 text-end pe-3">
-                                            <span class="badge bg-danger text-white border border-danger px-4 py-2 rounded-pill fw-bold shadow-sm">TUTUP</span>
+                                            <span class="badge bg-danger text-white border border-danger px-4 py-2 rounded-pill fw-bold shadow-sm">DI LUAR JAM PELAYANAN</span>
                                         </td>
                                     </tr>
                                 </tbody>
