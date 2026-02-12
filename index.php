@@ -184,53 +184,98 @@ include 'includes/navbar.php';
             <p class="text-muted mx-auto" style="max-width: 600px;">Kumpulan poster edukasi dan informasi penting untuk keluarga Indonesia.</p>
         </div>
         
-        <!-- Marquee Container with Fade Edges -->
-        <div class="marquee-wrapper">
-            <!-- Marquee Track -->
-            <div class="marquee-content d-inline-flex align-items-center">
-                <?php
-                // Ambil data galeri dari database
-                $q_galeri = mysqli_query($conn, "SELECT * FROM poster_edukasi ORDER BY id DESC");
-                $galeri_items = [];
-                if ($q_galeri) {
-                    while ($row = mysqli_fetch_assoc($q_galeri)) {
-                        $galeri_items[] = $row;
-                    }
+        <!-- Gallery Grid (Auto Rotate) -->
+        <div id="poster-gallery-wrapper" style="min-height: 400px;">
+            <div id="poster-gallery-container" class="row g-4 justify-content-center">
+                <!-- Content will be loaded by JS -->
+            </div>
+        </div>
+
+        <?php
+        // Fetch posters for JS
+        $q_galeri = mysqli_query($conn, "SELECT * FROM poster_edukasi ORDER BY id DESC");
+        $posters = [];
+        if ($q_galeri) {
+            while ($row = mysqli_fetch_assoc($q_galeri)) {
+                $posters[] = [
+                    'src' => (isset($row['is_local']) && $row['is_local']) ? $row['gambar'] : 'uploads/' . $row['gambar'],
+                    'title' => htmlspecialchars($row['judul'])
+                ];
+            }
+        }
+        ?>
+
+        <style>
+            @keyframes fadeInScale {
+                from { opacity: 0; transform: scale(0.95); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            .animate-poster {
+                animation: fadeInScale 0.8s ease-out forwards;
+            }
+        </style>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const posters = <?php echo json_encode($posters); ?>;
+            const container = document.getElementById('poster-gallery-container');
+            let currentIndex = 0;
+
+            function updateGallery() {
+                if (posters.length === 0) {
+                    container.innerHTML = '<div class="col-12 text-center text-muted">Belum ada poster edukasi.</div>';
+                    return;
                 }
 
-                // Jika database kosong, tampilkan pesan kosong atau biarkan kosong
-                if (empty($galeri_items)) {
-                    // Default poster dihapus sesuai permintaan agar bisa diisi manual
-                }
+                // Create new content fragment
+                const fragment = document.createDocumentFragment();
 
-                // Loop 2x untuk efek marquee infinite scroll (hanya jika ada data)
-                if (!empty($galeri_items)) {
-                    for ($i = 0; $i < 2; $i++) {
-                        foreach ($galeri_items as $item) {
-                            // Tentukan path gambar
-                            if (isset($item['is_local']) && $item['is_local']) {
-                                $img_src = $item['gambar'];
-                            } else {
-                                $img_src = 'uploads/' . $item['gambar'];
-                            }
-                            ?>
-                            <div class="poster-item">
-                                <div class="poster-card" onclick="showPoster('<?php echo $img_src; ?>', '<?php echo htmlspecialchars($item['judul']); ?>')">
-                                    <img src="<?php echo $img_src; ?>" alt="<?php echo htmlspecialchars($item['judul']); ?>">
-                                    <div class="poster-overlay">
-                                        <i class="bi bi-zoom-in"></i>
+                for (let i = 0; i < 2; i++) {
+                    // Cyclic index logic
+                    let idx = (currentIndex + i) % posters.length;
+                    let item = posters[idx];
+
+                    let col = document.createElement('div');
+                    col.className = 'col-md-5 col-lg-4 col-12 d-flex justify-content-center'; // Adjusted column size and added flex center
+                    
+                    // HTML Structure
+                    col.innerHTML = `
+                        <div class="poster-item w-100 animate-poster" style="animation-delay: ${i * 100}ms; max-width: 350px;"> <!-- Added max-width to center visually -->
+                            <div class="poster-card h-100 shadow rounded-4 overflow-hidden position-relative group bg-light border" 
+                                 onclick="showPoster('${item.src}', '${item.title}')" 
+                                 style="cursor: pointer; aspect-ratio: 2/3;">
+                                <img src="${item.src}" alt="${item.title}" 
+                                     class="w-100 h-100 object-fit-contain transition-transform duration-500 group-hover-scale">
+                                <div class="poster-overlay position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center opacity-0 group-hover-opacity transition-opacity">
+                                    <div class="text-center text-white p-3">
+                                        <i class="bi bi-zoom-in fs-2 mb-2 d-block drop-shadow"></i>
+                                        <small class="fw-bold text-uppercase tracking-wider text-shadow">${item.title}</small>
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                        }
-                    }
-                } else {
-                    echo '<div class="text-center w-100 py-5 text-muted">Belum ada poster edukasi. Silakan upload melalui Admin Panel.</div>';
+                        </div>
+                    `;
+                    fragment.appendChild(col);
                 }
-                ?>
-            </div>
-        </div>
+
+                // Replace content
+                container.innerHTML = '';
+                container.appendChild(fragment);
+
+                // Update index for next rotation
+                // Move by 2 (page flip)
+                currentIndex = (currentIndex + 2) % posters.length;
+            }
+
+            // Initial Load
+            updateGallery();
+
+            // Auto Rotate every 7 seconds (only if we have more than 2 items, or just always loop)
+            if (posters.length > 2) {
+                setInterval(updateGallery, 7000);
+            }
+        });
+        </script>
 
     </div>
 </section>
